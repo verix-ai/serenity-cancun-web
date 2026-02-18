@@ -53,7 +53,7 @@ export default function Navbar() {
                     <Link href="/" className="hover:text-primary transition-colors">
                         Home
                     </Link>
-                    <Link href="#residences" className="hover:text-primary transition-colors">
+                    <Link href="/residences" className="hover:text-primary transition-colors">
                         Residences
                     </Link>
                     <Link href="/amenities" className="hover:text-primary transition-colors">
@@ -132,7 +132,7 @@ export default function Navbar() {
                         Home
                     </Link>
                     <Link
-                        href="#residences"
+                        href="/residences"
                         className="block py-3 text-xs uppercase tracking-widest font-semibold hover:text-primary transition-colors"
                         onClick={() => setMobileOpen(false)}
                     >
