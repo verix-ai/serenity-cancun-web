@@ -103,7 +103,7 @@ export default function AboutPage() {
                         <div className="relative order-2 lg:order-1">
                             <div className="aspect-[4/3] rounded-lg overflow-hidden shadow-2xl relative">
                                 <Image
-                                    src="/assets/about-hero.png"
+                                    src="/assets/photo-gallery/building-front.jpg"
                                     alt="Serenity Luxury Condos nestled in the Mayan jungle"
                                     fill
                                     className="object-cover"

@@ -53,6 +53,12 @@ export default function Navbar() {
                     <Link href="/" className="hover:text-primary transition-colors">
                         Home
                     </Link>
+                    <Link href="#residences" className="hover:text-primary transition-colors">
+                        Residences
+                    </Link>
+                    <Link href="/amenities" className="hover:text-primary transition-colors">
+                        Amenities
+                    </Link>
 
                     {/* About Dropdown */}
                     <div
@@ -93,21 +99,15 @@ export default function Navbar() {
                         </div>
                     </div>
 
-                    <Link href="/amenities" className="hover:text-primary transition-colors">
-                        Amenities
-                    </Link>
-                    <Link href="#residences" className="hover:text-primary transition-colors">
-                        Residences
-                    </Link>
                     <Link href="#contact" className="hover:text-primary transition-colors">
                         Inquiry
                     </Link>
                 </div>
 
                 <div className="flex items-center space-x-4">
-                    <button className="bg-primary text-white px-6 py-2 text-sm font-bold uppercase tracking-wider hover:bg-opacity-90 transition-all cursor-pointer">
+                    <Link href="#contact" className="bg-primary text-white px-6 py-2 text-sm font-bold uppercase tracking-wider hover:bg-opacity-90 transition-all cursor-pointer">
                         Book a Tour
-                    </button>
+                    </Link>
 
                     {/* Mobile menu button */}
                     <button
@@ -130,6 +130,20 @@ export default function Navbar() {
                         onClick={() => setMobileOpen(false)}
                     >
                         Home
+                    </Link>
+                    <Link
+                        href="#residences"
+                        className="block py-3 text-xs uppercase tracking-widest font-semibold hover:text-primary transition-colors"
+                        onClick={() => setMobileOpen(false)}
+                    >
+                        Residences
+                    </Link>
+                    <Link
+                        href="/amenities"
+                        className="block py-3 text-xs uppercase tracking-widest font-semibold hover:text-primary transition-colors"
+                        onClick={() => setMobileOpen(false)}
+                    >
+                        Amenities
                     </Link>
                     <div>
                         <button
@@ -161,20 +175,6 @@ export default function Navbar() {
                             </div>
                         )}
                     </div>
-                    <Link
-                        href="/amenities"
-                        className="block py-3 text-xs uppercase tracking-widest font-semibold hover:text-primary transition-colors"
-                        onClick={() => setMobileOpen(false)}
-                    >
-                        Amenities
-                    </Link>
-                    <Link
-                        href="#residences"
-                        className="block py-3 text-xs uppercase tracking-widest font-semibold hover:text-primary transition-colors"
-                        onClick={() => setMobileOpen(false)}
-                    >
-                        Residences
-                    </Link>
                     <Link
                         href="#contact"
                         className="block py-3 text-xs uppercase tracking-widest font-semibold hover:text-primary transition-colors"
