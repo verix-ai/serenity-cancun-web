@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { translations, type Translations } from "../constants/translations";
 
-type Language = "en" | "es";
+export type Language = "en" | "es" | "fr" | "it" | "de";
 
 interface LanguageContextType {
     language: Language;
@@ -28,12 +28,12 @@ interface LanguageProviderProps {
 }
 
 export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
-    const [language, setLanguage] = useState<Language>("es"); // Default to Spanish as requested
+    const [language, setLanguage] = useState<Language>("en");
 
     // Persist language preference
     useEffect(() => {
         const savedLang = localStorage.getItem("language") as Language;
-        if (savedLang) {
+        if (savedLang && ["en", "es", "fr", "it", "de"].includes(savedLang)) {
             setLanguage(savedLang);
         }
     }, []);
@@ -43,7 +43,9 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
     }, [language]);
 
     const toggleLanguage = () => {
-        setLanguage((prev) => (prev === "en" ? "es" : "en"));
+        const langs: Language[] = ["en", "es", "fr", "it", "de"];
+        const idx = langs.indexOf(language);
+        setLanguage(langs[(idx + 1) % langs.length]);
     };
 
     const currentTranslations = translations[language];
