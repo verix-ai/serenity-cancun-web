@@ -133,6 +133,12 @@ export default function Footer() {
                 </div>
                 <div className="border-t border-gray-800 pt-12 text-center text-sm text-gray-500 uppercase tracking-widest">
                     <p>Copyright © 2026 Serenity Luxury Condos. All Rights Reserved.</p>
+                    <Link
+                        href="/information/privacy-policy"
+                        className="inline-block mt-4 text-gray-500 hover:text-primary transition-colors duration-300"
+                    >
+                        Privacy Policy
+                    </Link>
                 </div>
             </div>
             <div className="fixed bottom-8 right-8 z-50 flex flex-col space-y-4">

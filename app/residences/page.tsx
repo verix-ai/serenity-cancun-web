@@ -65,7 +65,7 @@ const residences = [
         tagline: "The Pinnacle of Serenity Living",
         description:
             "The Jaguar Plus represents the very best that Serenity has to offer. With three private balconies, a personal hot tub, and elegant finishes in every room, this exclusive residence is crafted for those who settle for nothing less than extraordinary.",
-        image: "/assets/photo-gallery/pool-3.png",
+        image: "/assets/photo-gallery/bedroom 2.jpg",
         icon: "diamond",
         features: [
             { icon: "bed", label: "2 Bedrooms", detail: "Elegantly designed for maximum comfort and privacy" },
@@ -241,7 +241,7 @@ export default function ResidencesPage() {
                             {res.features.map((feature) => (
                                 <div
                                     key={feature.label}
-                                    className="group bg-white dark:bg-deep-dark p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 dark:border-gray-800"
+                                    className="group bg-white dark:bg-deep-dark p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-primary/30"
                                 >
                                     <div className="flex items-start gap-4">
                                         <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors">
