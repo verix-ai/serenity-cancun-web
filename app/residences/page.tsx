@@ -1,95 +1,83 @@
-import type { Metadata } from "next";
+"use client";
+
 import Image from "next/image";
 import Navbar from "../components/Navbar";
 import PageHero from "../components/PageHero";
 import Footer from "../components/Footer";
-
-export const metadata: Metadata = {
-    title: "Residences | Serenity Luxury Condos – Exclusive Living in the Riviera Maya",
-    description:
-        "Explore the exclusive residences at Serenity Luxury Condos. Choose from Quetzal, Quetzal Plus, and Jaguar Plus units, each offering contemporary design, premium finishes, and breathtaking surroundings in the Riviera Maya.",
-};
-
-const residences = [
-    {
-        name: "Quetzal",
-        tier: "Classic Residence",
-        units: 6,
-        tagline: "Refined Comfort, Naturally Inspired",
-        description:
-            "The Quetzal residence brings together spacious, open living with natural elegance. Designed for those who appreciate thoughtful simplicity paired with luxury finishes, every corner of this home feels warm, inviting, and distinctly yours.",
-        image: "/assets/photo-gallery/livingroom-1.png",
-        icon: "apartment",
-        features: [
-            { icon: "bed", label: "2 Bedrooms", detail: "Spacious and inviting layouts designed for restful living" },
-            { icon: "bathroom", label: "1 Full Bathroom", detail: "Elegant fixtures and premium finishes throughout" },
-            { icon: "local_laundry_service", label: "Laundry Room", detail: "In-unit convenience for effortless everyday living" },
-            { icon: "weekend", label: "Living Area", detail: "A warm, open space perfect for relaxation and entertaining" },
-            { icon: "restaurant", label: "Kitchen & Dining", detail: "Modern and fully equipped for all your culinary needs" },
-            { icon: "balcony", label: "Private Balcony", detail: "Take in sweeping views of the lush tropical surroundings" },
-        ],
-        signature: {
-            icon: "water",
-            title: "Signature Waterfall Feature",
-            description: "A cascading waterfall flows through the center of each unit, bringing the soothing sounds of nature directly into your home.",
-        },
-    },
-    {
-        name: "Quetzal Plus",
-        tier: "Premium Residence",
-        units: 4,
-        tagline: "Elevated Living, Unmatched Detail",
-        description:
-            "The Quetzal Plus takes the beloved Quetzal layout and enhances it with additional space, privacy, and luxury. With a dedicated master suite, extra restrooms, and premium appointments throughout, this residence is designed for those who demand more from their home.",
-        image: "/assets/photo-gallery/bedroom-1.jpg",
-        icon: "villa",
-        features: [
-            { icon: "bed", label: "2 Bedrooms", detail: "Thoughtfully designed with generous proportions for total comfort" },
-            { icon: "spa", label: "Master En-Suite", detail: "Your own private oasis with a dedicated luxury bathroom" },
-            { icon: "bathroom", label: "2 Restrooms", detail: "Extra convenience for residents and guests alike" },
-            { icon: "local_laundry_service", label: "Laundry Room", detail: "Ensuring effortless and efficient everyday routines" },
-            { icon: "restaurant", label: "Kitchen & Dining", detail: "Designed for entertaining and daily culinary enjoyment" },
-            { icon: "weekend", label: "Living Area", detail: "Spacious, stylish, and made for gathering" },
-            { icon: "balcony", label: "Private Balcony", detail: "Breathtaking views right at your fingertips" },
-        ],
-        signature: {
-            icon: "water",
-            title: "Signature Waterfall Feature",
-            description: "A signature indoor waterfall adds a unique and soothing ambiance, creating a one-of-a-kind atmosphere inside your residence.",
-        },
-    },
-    {
-        name: "Jaguar Plus",
-        tier: "Exclusive Residence",
-        units: 3,
-        tagline: "The Pinnacle of Serenity Living",
-        description:
-            "The Jaguar Plus represents the very best that Serenity has to offer. With three private balconies, a personal hot tub, and elegant finishes in every room, this exclusive residence is crafted for those who settle for nothing less than extraordinary.",
-        image: "/assets/photo-gallery/bedroom 2.jpg",
-        icon: "diamond",
-        features: [
-            { icon: "bed", label: "2 Bedrooms", detail: "Elegantly designed for maximum comfort and privacy" },
-            { icon: "bathroom", label: "1.5 Restrooms", detail: "Stylish, practical, and finished to the highest standard" },
-            { icon: "balcony", label: "3 Private Balconies", detail: "Unparalleled panoramic views from every angle of your home" },
-            { icon: "weekend", label: "Living Area", detail: "A perfect blend of contemporary style and total relaxation" },
-            { icon: "restaurant", label: "Kitchen & Dining", detail: "Equipped with premium appliances and designer finishes" },
-            { icon: "local_laundry_service", label: "Laundry Room", detail: "Designed for modern convenience and efficiency" },
-        ],
-        signature: {
-            icon: "hot_tub",
-            title: "Private Hot Tub",
-            description: "Your personal haven for relaxation and luxury. Unwind under the stars in the privacy of your own residence.",
-        },
-    },
-];
+import { useLanguage } from "../context/LanguageContext";
 
 export default function ResidencesPage() {
+    const { translations } = useLanguage();
+    const t = translations.residences;
+    const tf = t.features; // Feature labels
+
+    const residences = [
+        {
+            ...t.list[0], // Quetzal
+            units: 6,
+            image: "/assets/photo-gallery/livingroom-1.png",
+            icon: "apartment",
+            features: [
+                { icon: "bed", label: tf.bedrooms, detail: t.list[0].features[0].detail },
+                { icon: "bathroom", label: tf.bathroom, detail: t.list[0].features[1].detail },
+                { icon: "local_laundry_service", label: tf.laundry, detail: t.list[0].features[2].detail },
+                { icon: "weekend", label: tf.living, detail: t.list[0].features[3].detail },
+                { icon: "restaurant", label: tf.kitchen, detail: t.list[0].features[4].detail },
+                { icon: "balcony", label: tf.balcony, detail: t.list[0].features[5].detail },
+            ],
+            signature: {
+                icon: "water",
+                title: t.list[0].signatureTitle,
+                description: t.list[0].signatureDesc,
+            },
+        },
+        {
+            ...t.list[1], // Quetzal Plus
+            units: 3,
+            image: "/assets/photo-gallery/bedroom-1.jpg",
+            icon: "villa",
+            features: [
+                { icon: "bed", label: tf.bedrooms, detail: t.list[1].features[0].detail },
+                { icon: "spa", label: tf.masterSuite, detail: t.list[1].features[1].detail },
+                { icon: "bathroom", label: tf.restrooms, detail: t.list[1].features[2].detail },
+                { icon: "local_laundry_service", label: tf.laundry, detail: t.list[1].features[3].detail },
+                { icon: "restaurant", label: tf.kitchen, detail: t.list[1].features[4].detail },
+                { icon: "weekend", label: tf.living, detail: t.list[1].features[5].detail },
+                { icon: "balcony", label: tf.balcony, detail: t.list[1].features[6].detail },
+            ],
+            signature: {
+                icon: "water",
+                title: t.list[1].signatureTitle,
+                description: t.list[1].signatureDesc,
+            },
+        },
+        {
+            ...t.list[2], // Jaguar Plus
+            units: 3,
+            image: "/assets/photo-gallery/bedroom 2.jpg",
+            icon: "diamond",
+            features: [
+                { icon: "bed", label: tf.bedrooms, detail: t.list[2].features[0].detail },
+                { icon: "bathroom", label: "1.5 " + tf.restrooms, detail: t.list[2].features[1].detail }, // "1.5 Restrooms"
+                { icon: "balcony", label: "3 " + tf.balcony, detail: t.list[2].features[2].detail }, // "3 Private Balconies" - slight approximation on pluralization for spanish but acceptable
+                { icon: "weekend", label: tf.living, detail: t.list[2].features[3].detail },
+                { icon: "restaurant", label: tf.kitchen, detail: t.list[2].features[4].detail },
+                { icon: "local_laundry_service", label: tf.laundry, detail: t.list[2].features[5].detail },
+            ],
+            signature: {
+                icon: "hot_tub",
+                title: t.list[2].signatureTitle,
+                description: t.list[2].signatureDesc,
+            },
+        },
+    ];
+
     return (
         <>
             <Navbar />
             <PageHero
-                title="Our Residences"
-                subtitle="Residences at Serenity Luxury Condos"
+                title={t.hero.title}
+                subtitle={t.hero.subtitle}
                 backgroundImage="/assets/photo-gallery/building-slantview.jpg"
             />
 
@@ -97,21 +85,17 @@ export default function ResidencesPage() {
             <section className="py-24 bg-white dark:bg-deep-dark">
                 <div className="max-w-4xl mx-auto px-6 text-center">
                     <span className="text-primary font-display tracking-[0.3em] uppercase text-sm mb-4 block">
-                        Discover Your Home
+                        {t.intro.label}
                     </span>
                     <h2 className="font-display text-4xl md:text-5xl font-bold text-deep-dark dark:text-white uppercase mb-8">
-                        Experience Luxury Like Never Before
+                        {t.intro.title}
                     </h2>
                     <div className="w-24 h-1 bg-primary mx-auto mb-10"></div>
                     <p className="font-body text-lg text-charcoal-dark dark:text-gray-300 leading-relaxed max-w-3xl mx-auto mb-6">
-                        Welcome to Serenity Luxury Condos, where modern design meets nature&apos;s serenity. Our exclusive
-                        residences offer a seamless blend of contemporary architecture, high-end finishes, and breathtaking
-                        surroundings, all designed to deliver an unparalleled living experience in the heart of the Riviera Maya.
+                        {t.intro.p1}
                     </p>
                     <p className="font-body text-lg text-charcoal-dark dark:text-gray-300 leading-relaxed max-w-3xl mx-auto">
-                        Whether you&apos;re seeking a tranquil retreat or a smart investment opportunity, our thoughtfully designed
-                        residences provide the ideal balance of comfort, luxury, and everyday functionality. Explore our three
-                        unique residence types and find your perfect home in paradise.
+                        {t.intro.p2}
                     </p>
                 </div>
             </section>
@@ -138,10 +122,10 @@ export default function ResidencesPage() {
                                     {res.tier}
                                 </span>
                                 <span className="text-gray-400 font-body text-sm">
-                                    {res.units} Units Available
+                                    {res.units} {t.unitsAvailable}
                                 </span>
                                 <div className="mt-4 flex items-center justify-center gap-1 text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                    <span className="font-display text-xs tracking-widest uppercase">Explore</span>
+                                    <span className="font-display text-xs tracking-widest uppercase">{t.explore}</span>
                                     <span className="material-icons text-sm">arrow_downward</span>
                                 </div>
                             </a>
@@ -170,7 +154,7 @@ export default function ResidencesPage() {
                                 {res.name}
                             </h2>
                             <span className="inline-block bg-primary/10 text-primary font-display tracking-widest uppercase text-xs px-4 py-2 mb-6">
-                                {res.units} Units Available
+                                {res.units} {t.unitsAvailable}
                             </span>
                             <p className="font-script text-3xl text-primary mt-2">
                                 {res.tagline}
@@ -213,7 +197,7 @@ export default function ResidencesPage() {
                                     <div className="h-px flex-1 bg-primary/20"></div>
                                 </div>
                                 <h3 className="font-display text-3xl md:text-4xl font-bold text-deep-dark dark:text-white uppercase mb-6">
-                                    About the {res.name}
+                                    {t.aboutPrefix} {res.name}
                                 </h3>
                                 <p className="font-body text-lg text-charcoal-dark dark:text-gray-300 leading-relaxed mb-8">
                                     {res.description}
@@ -271,46 +255,40 @@ export default function ResidencesPage() {
                     <div className="grid md:grid-cols-2 gap-16 items-center">
                         <div>
                             <span className="text-primary font-display tracking-[0.3em] uppercase text-sm mb-4 block">
-                                Crafted for You
+                                {t.unparalleled.label}
                             </span>
                             <h2 className="font-display text-4xl md:text-5xl font-bold text-deep-dark dark:text-white uppercase mb-8">
-                                Unparalleled Living, Unmatched Comfort
+                                {t.unparalleled.title}
                             </h2>
                             <div className="space-y-6 text-charcoal-dark dark:text-gray-300 leading-relaxed text-lg">
                                 <p>
-                                    Every Serenity residence is built with premium materials, contemporary aesthetics, and
-                                    sustainable design principles, creating a harmonious environment where sophistication
-                                    meets everyday comfort. From the moment you step inside, you&apos;ll feel the difference
-                                    that intentional craftsmanship makes.
+                                    {t.unparalleled.p1}
                                 </p>
                                 <p>
-                                    Thoughtfully designed interiors, breathtaking views of the surrounding jungle, and
-                                    access to world-class amenities ensure that every moment spent at Serenity is one
-                                    of true luxury and tranquility. This is more than a home; it&apos;s the lifestyle
-                                    you&apos;ve been searching for.
+                                    {t.unparalleled.p2}
                                 </p>
                             </div>
                         </div>
                         <div className="grid grid-cols-2 gap-4">
                             <div className="bg-background-light dark:bg-background-dark p-8 rounded-xl text-center">
                                 <span className="material-icons text-primary text-4xl mb-3 block">verified</span>
-                                <h4 className="font-display text-sm font-bold uppercase tracking-wider text-deep-dark dark:text-white mb-1">Premium Materials</h4>
-                                <p className="font-body text-xs text-gray-500">Quality you can see and feel</p>
+                                <h4 className="font-display text-sm font-bold uppercase tracking-wider text-deep-dark dark:text-white mb-1">{t.unparalleled.highlight1}</h4>
+                                <p className="font-body text-xs text-gray-500">{t.unparalleled.highlight1Desc}</p>
                             </div>
                             <div className="bg-background-light dark:bg-background-dark p-8 rounded-xl text-center">
                                 <span className="material-icons text-primary text-4xl mb-3 block">eco</span>
-                                <h4 className="font-display text-sm font-bold uppercase tracking-wider text-deep-dark dark:text-white mb-1">Sustainable Design</h4>
-                                <p className="font-body text-xs text-gray-500">Built with the earth in mind</p>
+                                <h4 className="font-display text-sm font-bold uppercase tracking-wider text-deep-dark dark:text-white mb-1">{t.unparalleled.highlight2}</h4>
+                                <p className="font-body text-xs text-gray-500">{t.unparalleled.highlight2Desc}</p>
                             </div>
                             <div className="bg-background-light dark:bg-background-dark p-8 rounded-xl text-center">
                                 <span className="material-icons text-primary text-4xl mb-3 block">landscape</span>
-                                <h4 className="font-display text-sm font-bold uppercase tracking-wider text-deep-dark dark:text-white mb-1">Stunning Views</h4>
-                                <p className="font-body text-xs text-gray-500">Nature at every turn</p>
+                                <h4 className="font-display text-sm font-bold uppercase tracking-wider text-deep-dark dark:text-white mb-1">{t.unparalleled.highlight3}</h4>
+                                <p className="font-body text-xs text-gray-500">{t.unparalleled.highlight3Desc}</p>
                             </div>
                             <div className="bg-background-light dark:bg-background-dark p-8 rounded-xl text-center">
                                 <span className="material-icons text-primary text-4xl mb-3 block">auto_awesome</span>
-                                <h4 className="font-display text-sm font-bold uppercase tracking-wider text-deep-dark dark:text-white mb-1">Modern Interiors</h4>
-                                <p className="font-body text-xs text-gray-500">Contemporary elegance throughout</p>
+                                <h4 className="font-display text-sm font-bold uppercase tracking-wider text-deep-dark dark:text-white mb-1">{t.unparalleled.highlight4}</h4>
+                                <p className="font-body text-xs text-gray-500">{t.unparalleled.highlight4Desc}</p>
                             </div>
                         </div>
                     </div>
@@ -321,27 +299,24 @@ export default function ResidencesPage() {
             <section className="py-24 bg-background-light dark:bg-background-dark">
                 <div className="max-w-4xl mx-auto px-6 text-center">
                     <span className="font-script text-4xl text-primary block mb-6">
-                        Your Dream Home Awaits
+                        {t.dreamHome.subtitle}
                     </span>
                     <h2 className="font-display text-3xl md:text-5xl font-bold text-deep-dark dark:text-white uppercase mb-8">
-                        Live in Serene Opulence
+                        {t.dreamHome.title}
                     </h2>
                     <div className="w-24 h-1 bg-primary mx-auto mb-10"></div>
                     <p className="font-body text-lg text-charcoal-dark dark:text-gray-300 leading-relaxed mb-6 max-w-3xl mx-auto">
-                        Whether you&apos;re searching for a permanent residence, a private vacation retreat, or a
-                        high-value investment property, Serenity Luxury Condos offers a rare opportunity to live
-                        surrounded by nature&apos;s beauty without sacrificing modern luxury.
+                        {t.dreamHome.p1}
                     </p>
                     <p className="font-body text-lg text-charcoal-dark dark:text-gray-300 leading-relaxed mb-10 max-w-3xl mx-auto">
-                        Discover your perfect space and become part of an exclusive community in the heart of
-                        the Riviera Maya. Your new chapter starts here.
+                        {t.dreamHome.p2}
                     </p>
                     <a
                         href="#inquiry"
                         className="inline-flex items-center gap-2 bg-primary text-white font-display tracking-widest uppercase text-sm px-10 py-4 hover:bg-primary/90 transition-colors"
                     >
                         <span className="material-icons text-lg">calendar_month</span>
-                        Schedule a Visit Today
+                        {t.dreamHome.schedule}
                     </a>
                 </div>
             </section>
@@ -350,27 +325,26 @@ export default function ResidencesPage() {
             <section className="py-24 bg-deep-dark text-center">
                 <div className="max-w-4xl mx-auto px-6">
                     <span className="font-script text-4xl text-primary block mb-4">
-                        Find Your Perfect Residence
+                        {t.cta.subtitle}
                     </span>
                     <h2 className="font-display text-3xl md:text-5xl font-bold text-white uppercase mb-8">
-                        Ready to Call Serenity Home?
+                        {t.cta.title}
                     </h2>
                     <p className="font-body text-lg text-gray-400 leading-relaxed mb-10 max-w-2xl mx-auto">
-                        Schedule a private tour to experience the quality and craftsmanship of our residences firsthand.
-                        Let us help you discover the home that perfectly fits your lifestyle.
+                        {t.cta.description}
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <a
                             href="#inquiry"
                             className="inline-block bg-primary text-white font-display tracking-widest uppercase text-sm px-10 py-4 hover:bg-primary/90 transition-colors"
                         >
-                            Schedule a Tour
+                            {t.cta.scheduleTour}
                         </a>
                         <a
                             href="/amenities"
                             className="inline-block border-2 border-primary text-primary font-display tracking-widest uppercase text-sm px-10 py-4 hover:bg-primary hover:text-white transition-colors"
                         >
-                            Explore Amenities
+                            {t.cta.exploreAmenities}
                         </a>
                     </div>
                 </div>

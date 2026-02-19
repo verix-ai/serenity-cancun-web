@@ -1,7 +1,13 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function Footer() {
+    const { translations } = useLanguage();
+    const t = translations.footer;
+
     return (
         <footer id="contact" className="bg-deep-dark text-white pt-24 pb-12">
             <div className="max-w-7xl mx-auto px-6">
@@ -20,15 +26,14 @@ export default function Footer() {
                             </span>
                         </div>
                         <p className="text-gray-400 text-lg mb-10 max-w-md">
-                            Serenity Luxury Condos offers a unique blend of modern elegance and
-                            natural tranquility in the heart of the Riviera Maya.
+                            {t.description}
                         </p>
                         <div className="space-y-6">
                             <div className="flex items-start space-x-4">
                                 <span className="material-icons text-primary">phone</span>
                                 <div>
                                     <p className="text-xs uppercase tracking-widest text-gray-500 mb-1">
-                                        Call Us
+                                        {t.callUs}
                                     </p>
                                     <p className="font-display text-xl">+1 209-689-1052</p>
                                 </div>
@@ -37,7 +42,7 @@ export default function Footer() {
                                 <span className="material-icons text-primary">email</span>
                                 <div>
                                     <p className="text-xs uppercase tracking-widest text-gray-500 mb-1">
-                                        Email Us
+                                        {t.emailUs}
                                     </p>
                                     <p className="font-display text-xl">
                                         info@serenityluxurycondos.com
@@ -48,10 +53,10 @@ export default function Footer() {
                                 <span className="material-icons text-primary">location_on</span>
                                 <div>
                                     <p className="text-xs uppercase tracking-widest text-gray-500 mb-1">
-                                        Address
+                                        {t.address}
                                     </p>
                                     <p className="font-display text-xl">
-                                        Cancun, Quintana Roo, Mexico
+                                        {t.location}
                                     </p>
                                 </div>
                             </div>
@@ -97,28 +102,28 @@ export default function Footer() {
                     </div>
                     <div className="bg-charcoal-dark p-8 md:p-12 rounded-lg">
                         <h3 className="font-display text-3xl font-bold uppercase mb-8">
-                            Inquiry Form
+                            {t.inquiryForm}
                         </h3>
                         <form className="space-y-6">
                             <div className="grid grid-cols-2 gap-4">
                                 <input
                                     type="text"
-                                    placeholder="First Name"
+                                    placeholder={t.placeholders.firstName}
                                     className="bg-deep-dark border-gray-700 text-white p-4 focus:ring-primary focus:border-primary w-full"
                                 />
                                 <input
                                     type="text"
-                                    placeholder="Last Name"
+                                    placeholder={t.placeholders.lastName}
                                     className="bg-deep-dark border-gray-700 text-white p-4 focus:ring-primary focus:border-primary w-full"
                                 />
                             </div>
                             <input
                                 type="email"
-                                placeholder="Email Address"
+                                placeholder={t.placeholders.email}
                                 className="bg-deep-dark border-gray-700 text-white p-4 focus:ring-primary focus:border-primary w-full"
                             />
                             <textarea
-                                placeholder="Your Message"
+                                placeholder={t.placeholders.message}
                                 rows={4}
                                 className="bg-deep-dark border-gray-700 text-white p-4 focus:ring-primary focus:border-primary w-full"
                             ></textarea>
@@ -126,18 +131,18 @@ export default function Footer() {
                                 type="submit"
                                 className="w-full bg-primary text-white font-display text-xl py-4 uppercase tracking-[0.2em] hover:bg-opacity-90 transition-all cursor-pointer"
                             >
-                                Send Inquiry
+                                {t.send}
                             </button>
                         </form>
                     </div>
                 </div>
                 <div className="border-t border-gray-800 pt-12 text-center text-sm text-gray-500 uppercase tracking-widest">
-                    <p>Copyright © 2026 Serenity Luxury Condos. All Rights Reserved.</p>
+                    <p>{t.copyright}</p>
                     <Link
                         href="/information/privacy-policy"
                         className="inline-block mt-4 text-gray-500 hover:text-primary transition-colors duration-300"
                     >
-                        Privacy Policy
+                        {t.privacy}
                     </Link>
                 </div>
             </div>

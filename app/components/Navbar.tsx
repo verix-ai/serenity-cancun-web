@@ -3,8 +3,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
+import LanguageSelector from "./LanguageSelector";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function Navbar() {
+    const { translations } = useLanguage();
+    const t = translations.navbar;
+
     const [aboutOpen, setAboutOpen] = useState(false);
     const [infoOpen, setInfoOpen] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
@@ -37,15 +42,15 @@ export default function Navbar() {
     };
 
     const aboutLinks = [
-        { href: "/about", label: "About Us" },
-        { href: "/about/mission-vision", label: "Mission & Vision" },
-        { href: "/about/our-story", label: "Our Story" },
-        { href: "/about/why-us", label: "Why Us" },
+        { href: "/about", label: t.aboutUs },
+        { href: "/about/mission-vision", label: t.mission },
+        { href: "/about/our-story", label: t.story },
+        { href: "/about/why-us", label: t.whyUs },
     ];
 
     const infoLinks = [
-        { href: "/information/investment", label: "Investment Opportunities" },
-        { href: "/information/faqs", label: "FAQs" },
+        { href: "/information/investment", label: t.investment },
+        { href: "/information/faqs", label: t.faqs },
     ];
 
     return (
@@ -67,13 +72,13 @@ export default function Navbar() {
                 {/* Desktop Nav */}
                 <div className="hidden md:flex items-center space-x-8 uppercase text-xs tracking-widest font-semibold">
                     <Link href="/" className="hover:text-primary transition-colors">
-                        Home
+                        {t.home}
                     </Link>
                     <Link href="/residences" className="hover:text-primary transition-colors">
-                        Residences
+                        {t.residences}
                     </Link>
                     <Link href="/amenities" className="hover:text-primary transition-colors">
-                        Amenities
+                        {t.amenities}
                     </Link>
 
                     {/* Information Dropdown */}
@@ -87,7 +92,7 @@ export default function Navbar() {
                             className="flex items-center gap-1 hover:text-primary transition-colors cursor-pointer uppercase"
                             onClick={() => setInfoOpen(!infoOpen)}
                         >
-                            Information
+                            {t.information}
                             <span
                                 className={`material-icons text-sm transition-transform duration-200 ${infoOpen ? "rotate-180" : ""}`}
                             >
@@ -126,7 +131,7 @@ export default function Navbar() {
                             className="flex items-center gap-1 hover:text-primary transition-colors cursor-pointer uppercase"
                             onClick={() => setAboutOpen(!aboutOpen)}
                         >
-                            About
+                            {t.about}
                             <span
                                 className={`material-icons text-sm transition-transform duration-200 ${aboutOpen ? "rotate-180" : ""}`}
                             >
@@ -155,13 +160,16 @@ export default function Navbar() {
                     </div>
 
                     <Link href="#contact" className="hover:text-primary transition-colors">
-                        Inquiry
+                        {t.inquiry}
                     </Link>
                 </div>
 
                 <div className="flex items-center gap-3 sm:gap-4 shrink-0">
+                    <div className="hidden sm:block">
+                        <LanguageSelector />
+                    </div>
                     <Link href="#contact" className="bg-primary text-white px-4 sm:px-6 py-2 text-xs sm:text-sm font-bold uppercase tracking-wider whitespace-nowrap hover:bg-opacity-90 transition-all cursor-pointer">
-                        Book a Tour
+                        {t.bookTour}
                     </Link>
 
                     {/* Mobile menu button */}
@@ -184,21 +192,21 @@ export default function Navbar() {
                         className="block py-3 text-xs uppercase tracking-widest font-semibold hover:text-primary transition-colors"
                         onClick={() => setMobileOpen(false)}
                     >
-                        Home
+                        {t.home}
                     </Link>
                     <Link
                         href="/residences"
                         className="block py-3 text-xs uppercase tracking-widest font-semibold hover:text-primary transition-colors"
                         onClick={() => setMobileOpen(false)}
                     >
-                        Residences
+                        {t.residences}
                     </Link>
                     <Link
                         href="/amenities"
                         className="block py-3 text-xs uppercase tracking-widest font-semibold hover:text-primary transition-colors"
                         onClick={() => setMobileOpen(false)}
                     >
-                        Amenities
+                        {t.amenities}
                     </Link>
 
                     {/* Mobile Information */}
@@ -207,7 +215,7 @@ export default function Navbar() {
                             className="w-full flex items-center justify-between py-3 text-xs uppercase tracking-widest font-semibold hover:text-primary transition-colors cursor-pointer"
                             onClick={() => setInfoOpen(!infoOpen)}
                         >
-                            Information
+                            {t.information}
                             <span
                                 className={`material-icons text-sm transition-transform duration-200 ${infoOpen ? "rotate-180" : ""}`}
                             >
@@ -239,7 +247,7 @@ export default function Navbar() {
                             className="w-full flex items-center justify-between py-3 text-xs uppercase tracking-widest font-semibold hover:text-primary transition-colors cursor-pointer"
                             onClick={() => setAboutOpen(!aboutOpen)}
                         >
-                            About
+                            {t.about}
                             <span
                                 className={`material-icons text-sm transition-transform duration-200 ${aboutOpen ? "rotate-180" : ""}`}
                             >
@@ -270,8 +278,10 @@ export default function Navbar() {
                         className="block py-3 text-xs uppercase tracking-widest font-semibold hover:text-primary transition-colors"
                         onClick={() => setMobileOpen(false)}
                     >
-                        Inquiry
+                        {t.inquiry}
                     </Link>
+
+                    <LanguageSelector mobile={true} />
                 </div>
             )}
         </nav>

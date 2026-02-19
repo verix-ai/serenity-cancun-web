@@ -1,7 +1,13 @@
+"use client";
+
 import Link from "next/link";
+import { useLanguage } from "../context/LanguageContext";
 
 
 export default function Hero() {
+    const { translations } = useLanguage();
+    const t = translations.home.hero;
+
     return (
         <section className="relative h-screen flex items-center overflow-hidden">
             <div className="absolute inset-0 z-0">
@@ -19,21 +25,20 @@ export default function Hero() {
             <div className="relative z-10 max-w-7xl mx-auto px-6 w-full pt-20">
                 <div className="max-w-2xl">
                     <h2 className="font-script text-primary text-5xl md:text-6xl mb-4">
-                        Embrace Nature&#39;s Serenity
+                        {t.subtitle}
                     </h2>
                     <h1 className="font-display text-6xl md:text-8xl font-bold text-white uppercase leading-tight mb-8">
-                        Live <span className="text-primary">Surrounded</span> By Nature
+                        {t.title} <span className="text-primary">{t.titleHighlight}</span> {t.titleEnd}
                     </h1>
                     <p className="text-gray-300 text-lg md:text-xl font-light mb-10 max-w-lg leading-relaxed">
-                        Live in tranquility with luxury within the Mayan Jungle. Experience a
-                        new standard of living in the heart of the Rivera Mayan in Zona Continental Isla Mujeres Quintana Roo Mexico.
+                        {t.description}
                     </p>
                     <div className="flex space-x-4">
                         <Link
                             href="#about"
                             className="bg-primary text-white px-8 py-4 font-display text-xl uppercase tracking-widest hover:translate-y-[-2px] transition-transform inline-block"
                         >
-                            Explore More
+                            {t.explore}
                         </Link>
                     </div>
                 </div>
@@ -44,3 +49,4 @@ export default function Hero() {
         </section>
     );
 }
+

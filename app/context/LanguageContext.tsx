@@ -1,0 +1,71 @@
+"use client";
+
+import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { translations, type Translations } from "../constants/translations";
+
+type Language = "en" | "es";
+
+interface LanguageContextType {
+    language: Language;
+    setLanguage: (lang: Language) => void;
+    toggleLanguage: () => void;
+    t: (key: string) => string;
+    translations: Translations;
+}
+
+const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+
+export const useLanguage = () => {
+    const context = useContext(LanguageContext);
+    if (!context) {
+        throw new Error("useLanguage must be used within a LanguageProvider");
+    }
+    return context;
+};
+
+interface LanguageProviderProps {
+    children: ReactNode;
+}
+
+export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
+    const [language, setLanguage] = useState<Language>("es"); // Default to Spanish as requested
+
+    // Persist language preference
+    useEffect(() => {
+        const savedLang = localStorage.getItem("language") as Language;
+        if (savedLang) {
+            setLanguage(savedLang);
+        }
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem("language", language);
+    }, [language]);
+
+    const toggleLanguage = () => {
+        setLanguage((prev) => (prev === "en" ? "es" : "en"));
+    };
+
+    const currentTranslations = translations[language];
+
+    const t = (path: string): string => {
+        const keys = path.split(".");
+        let current: any = currentTranslations;
+
+        for (const key of keys) {
+            if (current[key] === undefined) {
+                console.warn(`Translation missing for key: ${path}`);
+                return path;
+            }
+            current = current[key];
+        }
+
+        return current as string;
+    };
+
+    return (
+        <LanguageContext.Provider value={{ language, setLanguage, toggleLanguage, t, translations: currentTranslations }}>
+            {children}
+        </LanguageContext.Provider>
+    );
+};

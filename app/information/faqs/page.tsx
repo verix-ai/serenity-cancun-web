@@ -5,105 +5,9 @@ import Footer from "../../components/Footer";
 import PageHero from "../../components/PageHero";
 import { useState } from "react";
 import Link from "next/link";
+import { useLanguage } from "../../context/LanguageContext";
 
-const faqCategories = [
-    {
-        category: "General Information",
-        icon: "info",
-        faqs: [
-            {
-                question: "Where is Serenity Luxury Condos located?",
-                answer: "Serenity Luxury Condos is located in the heart of the Riviera Maya, with properties in Isla Mujeres and Isla Blanca. These prime locations offer breathtaking landscapes, stunning beaches, and a tranquil yet luxurious lifestyle.",
-            },
-            {
-                question: "What makes Serenity Luxury Condos unique?",
-                answer: "Serenity offers a blend of modern architecture, luxurious amenities, and sustainable living in some of Mexico's most sought-after locations. Our properties include infinity pools, yoga areas, hot tubs, barbecue patios, and world-class security services.",
-            },
-            {
-                question: "Are the condos available for purchase or rental?",
-                answer: "Serenity Luxury Condos offers both purchase and rental options. Whether you're looking for a permanent home, a vacation property, or an investment opportunity, we have options to suit your needs.",
-            },
-        ],
-    },
-    {
-        category: "Buying & Investment",
-        icon: "payments",
-        faqs: [
-            {
-                question: "What are the benefits of investing in Serenity Luxury Condos?",
-                answer: "Investing in Serenity properties offers high appreciation value, strong rental income potential, and access to a growing luxury real estate market in the Riviera Maya. Our properties are designed for both comfort and profitability.",
-            },
-            {
-                question: "What financing options are available for buyers?",
-                answer: "We provide flexible financing options and legal assistance to ensure a seamless buying process. Contact our sales team to learn more about the financing plans we offer.",
-            },
-            {
-                question: "Can foreigners buy property in Mexico?",
-                answer: "Yes! Foreigners can legally own property in Mexico through a bank trust (fideicomiso) or a Mexican corporation. Our team assists international buyers in navigating the purchasing process.",
-            },
-        ],
-    },
-    {
-        category: "Amenities & Services",
-        icon: "spa",
-        faqs: [
-            {
-                question: "What amenities are included in the residences?",
-                answer: "Our condos feature community and rooftop infinity pools, sunbathing stations, barbecue areas, hot tubs, yoga spaces, private balconies, 24/7 security, and chauffeur services for ultimate comfort and luxury.",
-            },
-            {
-                question: "Is there on-site property management?",
-                answer: "Yes, we offer in-house property management services to handle maintenance, cleaning, and rental management, ensuring a hassle-free experience for homeowners and investors.",
-            },
-            {
-                question: "Do the condos come furnished?",
-                answer: "Some units offer fully furnished options, while others allow you to customize the interior design. Contact us for details on available furnishings and design packages.",
-            },
-        ],
-    },
-    {
-        category: "Rental Information",
-        icon: "villa",
-        faqs: [
-            {
-                question: "Can I rent out my condo when I'm not using it?",
-                answer: "Absolutely! Many of our owners list their condos on vacation rental platforms like Airbnb or through our property management services to generate passive income.",
-            },
-            {
-                question: "Is there a rental management service available?",
-                answer: "Yes, our professional rental management team handles everything from bookings to guest services, ensuring a seamless rental experience.",
-            },
-        ],
-    },
-    {
-        category: "Security & Safety",
-        icon: "security",
-        faqs: [
-            {
-                question: "How secure is the community?",
-                answer: "Serenity Luxury Condos offers 24/7 security with video surveillance, controlled access, and professional security personnel to ensure a safe living environment.",
-            },
-            {
-                question: "What natural disaster precautions are in place?",
-                answer: "Our properties are built with hurricane-resistant materials and follow strict safety regulations to withstand extreme weather conditions.",
-            },
-        ],
-    },
-    {
-        category: "Contact & Visits",
-        icon: "calendar_today",
-        faqs: [
-            {
-                question: "How can I schedule a visit?",
-                answer: "To schedule a private tour, contact our sales team through our website, phone, or email. Virtual tours are also available for international buyers.",
-            },
-            {
-                question: "Who can I contact for more information?",
-                answer: "You can reach our team via Phone: +1 209-689-1052 or Email: info@serenityluxurycondos.com. We're happy to assist with any questions you may have!",
-            },
-        ],
-    },
-];
+const categoryIcons = ["info", "payments", "spa", "villa", "security", "calendar_today"];
 
 function AccordionItem({
     question,
@@ -153,6 +57,8 @@ function AccordionItem({
 
 export default function FAQsPage() {
     const [openItems, setOpenItems] = useState<Record<string, boolean>>({});
+    const { translations } = useLanguage();
+    const t = translations.faqs;
 
     const toggleItem = (key: string) => {
         setOpenItems((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -164,8 +70,8 @@ export default function FAQsPage() {
         <>
             <Navbar />
             <PageHero
-                title="Frequently Asked Questions"
-                subtitle="We're Here to Help"
+                title={t.hero.title}
+                subtitle={t.hero.subtitle}
                 backgroundImage="/assets/photo-gallery/building-slantview.jpg"
             />
 
@@ -174,29 +80,27 @@ export default function FAQsPage() {
                 <div className="max-w-4xl mx-auto px-6">
                     <div className="text-center mb-16">
                         <span className="text-primary font-display tracking-[0.3em] uppercase text-sm mb-4 block">
-                            Got Questions?
+                            {t.intro.label}
                         </span>
                         <h2 className="font-display text-4xl md:text-5xl font-bold text-white uppercase mb-6">
-                            We Have{" "}
-                            <span className="text-primary">Answers</span>
+                            {t.intro.titlePrefix}{" "}
+                            <span className="text-primary">{t.intro.titleSuffix}</span>
                         </h2>
                         <div className="w-20 h-0.5 bg-primary mx-auto mb-6" />
                         <p className="font-body text-lg text-gray-400 max-w-2xl mx-auto">
-                            Everything you need to know about Serenity Luxury
-                            Condos, from purchasing and financing to amenities
-                            and security.
+                            {t.intro.description}
                         </p>
                     </div>
 
                     {/* Category Sections */}
                     <div className="space-y-12">
-                        {faqCategories.map((cat) => (
+                        {t.categories.map((cat: { category: string; faqs: { question: string; answer: string }[] }, catIndex: number) => (
                             <div key={cat.category}>
                                 {/* Category Header */}
                                 <div className="flex items-center gap-4 mb-4">
                                     <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
                                         <span className="material-icons text-primary text-2xl">
-                                            {cat.icon}
+                                            {categoryIcons[catIndex]}
                                         </span>
                                     </div>
                                     <h3 className="font-display text-xl font-bold text-white uppercase tracking-wider">
@@ -207,7 +111,7 @@ export default function FAQsPage() {
 
                                 {/* Accordion items */}
                                 <div className="bg-charcoal-dark/30 border border-primary/15">
-                                    {cat.faqs.map((faq) => {
+                                    {cat.faqs.map((faq: { question: string; answer: string }) => {
                                         globalNumber++;
                                         const key = `${cat.category}-${globalNumber}`;
                                         return (
@@ -234,15 +138,13 @@ export default function FAQsPage() {
             <section className="py-24 bg-background-dark">
                 <div className="max-w-4xl mx-auto px-6 text-center">
                     <span className="font-script text-primary text-4xl md:text-5xl block mb-6">
-                        Still Have Questions?
+                        {t.cta.still}
                     </span>
                     <h2 className="font-display text-3xl md:text-4xl font-bold text-white uppercase mb-8">
-                        Contact Us Today
+                        {t.cta.contact}
                     </h2>
                     <p className="font-body text-lg text-gray-300 leading-relaxed mb-6 max-w-3xl mx-auto">
-                        Let us help you find your dream home at Serenity Luxury
-                        Condos. Our team is ready to assist with any questions
-                        you may have.
+                        {t.cta.description}
                     </p>
 
                     {/* Contact Details */}
@@ -276,13 +178,13 @@ export default function FAQsPage() {
                             href="/inquiry"
                             className="bg-primary text-white px-10 py-4 text-sm font-bold uppercase tracking-wider hover:bg-opacity-90 transition-all inline-block"
                         >
-                            Send Us a Message
+                            {t.cta.send}
                         </Link>
                         <Link
                             href="/residences"
                             className="border-2 border-primary text-primary px-10 py-4 text-sm font-bold uppercase tracking-wider hover:bg-primary hover:text-white transition-all inline-block"
                         >
-                            Explore Residences
+                            {t.cta.explore}
                         </Link>
                     </div>
                 </div>

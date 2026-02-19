@@ -1,22 +1,21 @@
+"use client";
+
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import PageHero from "../../components/PageHero";
 import Image from "next/image";
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-    title: "Our Story | Serenity Luxury Condos – From Vision to Reality",
-    description:
-        "Explore the story behind Serenity Luxury Condos, born from a passion for merging modern luxury with the natural allure of Mexico's Riviera Maya. Discover our journey of innovation and excellence.",
-};
+import { useLanguage } from "../../context/LanguageContext";
 
 export default function OurStoryPage() {
+    const { translations } = useLanguage();
+    const t = translations.story;
+
     return (
         <>
             <Navbar />
             <PageHero
-                title="Our Story"
-                subtitle="The Journey"
+                title={t.hero.title}
+                subtitle={t.hero.subtitle}
                 backgroundImage="/assets/photo-gallery/building-front.jpg"
             />
 
@@ -26,24 +25,17 @@ export default function OurStoryPage() {
                     <div className="grid lg:grid-cols-2 gap-16 items-center">
                         <div>
                             <span className="text-primary font-display tracking-[0.3em] uppercase text-sm mb-4 block">
-                                How It All Began
+                                {t.origin.label}
                             </span>
                             <h2 className="font-display text-4xl md:text-5xl font-bold text-deep-dark dark:text-white uppercase mb-8">
-                                A Vision Born in Paradise
+                                {t.origin.title}
                             </h2>
                             <div className="space-y-6 text-gray-600 dark:text-gray-400 leading-relaxed text-lg">
                                 <p>
-                                    Serenity Luxury Condos was born from a singular vision: to
-                                    create extraordinary living spaces where contemporary luxury
-                                    and the raw, captivating beauty of Mexico&apos;s Riviera Maya
-                                    exist as one.
+                                    {t.origin.p1}
                                 </p>
                                 <p>
-                                    What started as a passion-fueled concept quickly matured into
-                                    a distinguished real estate brand, one committed to developing
-                                    exclusive residential properties in the region&apos;s most
-                                    coveted locations, including the pristine shores of Isla Mujeres
-                                    and the untouched landscapes of Isla Blanca.
+                                    {t.origin.p2}
                                 </p>
                             </div>
                         </div>
@@ -58,7 +50,7 @@ export default function OurStoryPage() {
                             </div>
                             <div className="absolute -bottom-8 -left-8 bg-primary p-8 hidden md:block">
                                 <p className="font-script text-white text-3xl">
-                                    Where It Began
+                                    {t.origin.highlight}
                                 </p>
                             </div>
                         </div>
@@ -82,23 +74,17 @@ export default function OurStoryPage() {
                         </div>
                         <div className="order-1 lg:order-2">
                             <span className="text-primary font-display tracking-[0.3em] uppercase text-sm mb-4 block">
-                                Built With Purpose
+                                {t.growth.label}
                             </span>
                             <h2 className="font-display text-4xl md:text-5xl font-bold text-deep-dark dark:text-white uppercase mb-8">
-                                Crafting Community
+                                {t.growth.title}
                             </h2>
                             <div className="space-y-6 text-gray-600 dark:text-gray-400 leading-relaxed text-lg">
                                 <p>
-                                    Fueled by a deep reverence for architecture, design, and
-                                    sustainable development, we&apos;ve devoted ourselves to
-                                    building communities that seamlessly blend serenity with
-                                    sophistication.
+                                    {t.growth.p1}
                                 </p>
                                 <p>
-                                    Every project in our portfolio reflects an uncompromising
-                                    commitment to excellence, from thoughtfully designed living
-                                    spaces and world-class amenities to an emphasis on eco-conscious
-                                    practices that honor the environment we call home.
+                                    {t.growth.p2}
                                 </p>
                             </div>
                         </div>
@@ -110,22 +96,17 @@ export default function OurStoryPage() {
             <section className="py-24 bg-white dark:bg-deep-dark">
                 <div className="max-w-6xl mx-auto px-6 text-center">
                     <span className="text-primary font-display tracking-[0.3em] uppercase text-sm mb-4 block">
-                        The Road Ahead
+                        {t.today.label}
                     </span>
                     <h2 className="font-display text-4xl md:text-5xl font-bold text-deep-dark dark:text-white uppercase mb-8">
-                        Continuing the Legacy
+                        {t.today.title}
                     </h2>
                     <div className="space-y-6 text-gray-600 dark:text-gray-400 leading-relaxed text-lg max-w-3xl mx-auto">
                         <p>
-                            Today, Serenity Luxury Condos continues to raise the bar for
-                            upscale living in Mexico, welcoming discerning homeowners and
-                            visionary investors who seek a lifestyle as refined as it is
-                            inspiring.
+                            {t.today.p1}
                         </p>
                         <p>
-                            Our journey is defined by relentless innovation, unwavering
-                            dedication, and an enduring pursuit of perfection, one stunning
-                            development at a time.
+                            {t.today.p2}
                         </p>
                     </div>
                     <div className="w-24 h-1 bg-primary mx-auto mt-12"></div>

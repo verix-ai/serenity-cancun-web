@@ -1,22 +1,21 @@
+"use client";
+
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import PageHero from "../../components/PageHero";
 import Image from "next/image";
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-    title: "Mission & Vision | Serenity Luxury Condos – Our Purpose",
-    description:
-        "Learn about the mission and vision driving Serenity Luxury Condos. We blend modern architecture, sustainability, and world-class amenities to redefine luxury living in Mexico.",
-};
+import { useLanguage } from "../../context/LanguageContext";
 
 export default function MissionVisionPage() {
+    const { translations } = useLanguage();
+    const t = translations.mission;
+
     return (
         <>
             <Navbar />
             <PageHero
-                title="Mission & Vision"
-                subtitle="Our Purpose"
+                title={t.hero.title}
+                subtitle={t.hero.subtitle}
                 backgroundImage="/assets/photo-gallery/livingroom-1.png"
             />
 
@@ -26,28 +25,20 @@ export default function MissionVisionPage() {
                     <div className="grid lg:grid-cols-2 gap-16 items-center">
                         <div>
                             <span className="text-primary font-display tracking-[0.3em] uppercase text-sm mb-4 block">
-                                What Drives Us
+                                {t.mission.label}
                             </span>
                             <h2 className="font-display text-4xl md:text-5xl font-bold text-deep-dark dark:text-white uppercase mb-8">
-                                Our Mission
+                                {t.mission.title}
                             </h2>
                             <div className="space-y-6 text-gray-600 dark:text-gray-400 leading-relaxed text-lg">
                                 <p>
-                                    At Serenity Luxury Condos, we exist to redefine what luxury
-                                    living means. Not through excess, but through intentional
-                                    design that honors both modern sophistication and Mexico&apos;s
-                                    most spectacular natural landscapes.
+                                    {t.mission.p1}
                                 </p>
                                 <p>
-                                    We are dedicated to crafting exclusive residential experiences
-                                    where exceptional craftsmanship, forward-thinking architecture,
-                                    and thoughtful sustainability converge. Every space we create
-                                    is engineered to deliver enduring comfort, understated elegance,
-                                    and a lifestyle that consistently exceeds expectations.
+                                    {t.mission.p2}
                                 </p>
                                 <p>
-                                    Our residents don&apos;t just live in luxury. They live in
-                                    harmony with the world around them.
+                                    {t.mission.p3}
                                 </p>
                             </div>
                         </div>
@@ -62,7 +53,7 @@ export default function MissionVisionPage() {
                             </div>
                             <div className="absolute -bottom-8 -right-8 bg-primary p-8 hidden md:block">
                                 <p className="font-script text-white text-3xl">
-                                    Purpose-Driven Design
+                                    {t.mission.purpose}
                                 </p>
                             </div>
                         </div>
@@ -86,29 +77,20 @@ export default function MissionVisionPage() {
                         </div>
                         <div className="order-1 lg:order-2">
                             <span className="text-primary font-display tracking-[0.3em] uppercase text-sm mb-4 block">
-                                Where We&apos;re Headed
+                                {t.vision.label}
                             </span>
                             <h2 className="font-display text-4xl md:text-5xl font-bold text-deep-dark dark:text-white uppercase mb-8">
-                                Our Vision
+                                {t.vision.title}
                             </h2>
                             <div className="space-y-6 text-gray-600 dark:text-gray-400 leading-relaxed text-lg">
                                 <p>
-                                    Our vision is to become the definitive choice for luxury
-                                    condominium living across Mexico&apos;s most sought-after
-                                    destinations, setting a new benchmark for residential
-                                    developments that exist in true harmony with their surroundings.
+                                    {t.vision.p1}
                                 </p>
                                 <p>
-                                    We aspire to build communities where innovation meets
-                                    environmental stewardship, where world-class service is the
-                                    standard, and where every resident experiences the perfect
-                                    equilibrium between contemporary living and the timeless beauty
-                                    of nature.
+                                    {t.vision.p2}
                                 </p>
                                 <p>
-                                    Through unwavering commitment to quality, sustainability, and
-                                    thoughtful placemaking, we are shaping the future of luxury
-                                    real estate, one extraordinary development at a time.
+                                    {t.vision.p3}
                                 </p>
                             </div>
                         </div>
