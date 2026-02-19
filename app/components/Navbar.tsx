@@ -50,16 +50,16 @@ export default function Navbar() {
 
     return (
         <nav className="fixed w-full z-50 bg-white/80 dark:bg-deep-dark/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
-            <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-                <Link href="/" className="flex items-center space-x-2">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between gap-3">
+                <Link href="/" className="flex items-center space-x-2 shrink-0">
                     <Image
                         src="/assets/logo.svg"
                         alt="Serenity Logo"
                         width={150}
                         height={40}
-                        className="h-10 w-auto"
+                        className="h-8 sm:h-10 w-auto"
                     />
-                    <span className="font-display text-2xl font-bold tracking-widest text-deep-dark dark:text-white uppercase">
+                    <span className="font-display text-xl sm:text-2xl font-bold tracking-widest text-deep-dark dark:text-white uppercase">
                         Serenity
                     </span>
                 </Link>
@@ -159,8 +159,8 @@ export default function Navbar() {
                     </Link>
                 </div>
 
-                <div className="flex items-center space-x-4">
-                    <Link href="#contact" className="bg-primary text-white px-6 py-2 text-sm font-bold uppercase tracking-wider hover:bg-opacity-90 transition-all cursor-pointer">
+                <div className="flex items-center gap-3 sm:gap-4 shrink-0">
+                    <Link href="#contact" className="bg-primary text-white px-4 sm:px-6 py-2 text-xs sm:text-sm font-bold uppercase tracking-wider whitespace-nowrap hover:bg-opacity-90 transition-all cursor-pointer">
                         Book a Tour
                     </Link>
 
