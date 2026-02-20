@@ -51,7 +51,7 @@ export default function AmenitiesPage() {
         },
         {
             ...t.cards[5],
-            image: "/assets/photo-gallery/birdeye-pool.png",
+            image: "/assets/yoga.jpeg",
             icon: "self_improvement",
         },
         {
@@ -66,7 +66,7 @@ export default function AmenitiesPage() {
         },
         {
             ...t.cards[8],
-            image: "/assets/beach-club1.jpg", // Placeholder until yacht image can be generated
+            image: "/assets/photo-gallery/yacht.png",
             icon: "sailing",
         },
     ];
