@@ -2,11 +2,57 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
 import { useLanguage } from "../context/LanguageContext";
 
 export default function Footer() {
     const { translations } = useLanguage();
     const t = translations.footer;
+
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+    const [formData, setFormData] = useState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        message: ""
+    });
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        setSubmitStatus("idle");
+
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            if (response.ok) {
+                setSubmitStatus("success");
+                setFormData({ firstName: "", lastName: "", email: "", phone: "", message: "" });
+            } else {
+                setSubmitStatus("error");
+            }
+        } catch (error) {
+            setSubmitStatus("error");
+            console.error(error);
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
 
     return (
         <footer id="contact" className="bg-deep-dark text-white pt-24 pb-12">
@@ -111,36 +157,73 @@ export default function Footer() {
                         <h3 className="font-display text-3xl font-bold uppercase mb-8">
                             {t.inquiryForm}
                         </h3>
-                        <form className="space-y-6">
-                            <div className="grid grid-cols-2 gap-4">
-                                <input
-                                    type="text"
-                                    placeholder={t.placeholders.firstName}
-                                    className="bg-deep-dark border-gray-700 text-white p-4 focus:ring-primary focus:border-primary w-full"
-                                />
-                                <input
-                                    type="text"
-                                    placeholder={t.placeholders.lastName}
-                                    className="bg-deep-dark border-gray-700 text-white p-4 focus:ring-primary focus:border-primary w-full"
-                                />
+                        {submitStatus === "success" ? (
+                            <div className="bg-primary/20 border border-primary text-white p-6 rounded-lg text-center">
+                                <span className="material-icons text-primary/80 text-4xl mb-2">check_circle</span>
+                                <p className="font-display text-lg">{t.successMessage}</p>
                             </div>
-                            <input
-                                type="email"
-                                placeholder={t.placeholders.email}
-                                className="bg-deep-dark border-gray-700 text-white p-4 focus:ring-primary focus:border-primary w-full"
-                            />
-                            <textarea
-                                placeholder={t.placeholders.message}
-                                rows={4}
-                                className="bg-deep-dark border-gray-700 text-white p-4 focus:ring-primary focus:border-primary w-full"
-                            ></textarea>
-                            <button
-                                type="submit"
-                                className="w-full bg-primary text-white font-display text-xl py-4 uppercase tracking-[0.2em] hover:bg-opacity-90 transition-all cursor-pointer"
-                            >
-                                {t.send}
-                            </button>
-                        </form>
+                        ) : (
+                            <form className="space-y-6" onSubmit={handleSubmit}>
+                                {submitStatus === "error" && (
+                                    <div className="bg-red-500/20 border border-red-500/50 text-white p-4 rounded-lg text-sm">
+                                        {t.errorMessage}
+                                    </div>
+                                )}
+                                <div className="grid grid-cols-2 gap-4">
+                                    <input
+                                        type="text"
+                                        name="firstName"
+                                        required
+                                        value={formData.firstName}
+                                        onChange={handleChange}
+                                        placeholder={t.placeholders.firstName}
+                                        className="bg-deep-dark border-gray-700 text-white p-4 focus:ring-primary focus:border-primary w-full"
+                                    />
+                                    <input
+                                        type="text"
+                                        name="lastName"
+                                        required
+                                        value={formData.lastName}
+                                        onChange={handleChange}
+                                        placeholder={t.placeholders.lastName}
+                                        className="bg-deep-dark border-gray-700 text-white p-4 focus:ring-primary focus:border-primary w-full"
+                                    />
+                                </div>
+                                <input
+                                    type="email"
+                                    name="email"
+                                    required
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    placeholder={t.placeholders.email}
+                                    className="bg-deep-dark border-gray-700 text-white p-4 focus:ring-primary focus:border-primary w-full"
+                                />
+                                <input
+                                    type="tel"
+                                    name="phone"
+                                    value={formData.phone}
+                                    onChange={handleChange}
+                                    placeholder={t.placeholders.phone}
+                                    className="bg-deep-dark border-gray-700 text-white p-4 focus:ring-primary focus:border-primary w-full"
+                                />
+                                <textarea
+                                    name="message"
+                                    required
+                                    value={formData.message}
+                                    onChange={handleChange}
+                                    placeholder={t.placeholders.message}
+                                    rows={4}
+                                    className="bg-deep-dark border-gray-700 text-white p-4 focus:ring-primary focus:border-primary w-full"
+                                ></textarea>
+                                <button
+                                    type="submit"
+                                    disabled={isSubmitting}
+                                    className="w-full bg-primary text-white font-display text-xl py-4 uppercase tracking-[0.2em] hover:bg-opacity-90 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                                >
+                                    {isSubmitting ? t.sending : t.send}
+                                </button>
+                            </form>
+                        )}
                     </div>
                 </div>
                 <div className="border-t border-gray-800 pt-12 text-center text-sm text-gray-500 uppercase tracking-widest">
