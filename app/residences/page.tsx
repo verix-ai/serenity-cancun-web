@@ -389,7 +389,7 @@ export default function ResidencesPage() {
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <a
-                            href="#inquiry"
+                            href="#contact"
                             className="inline-flex items-center gap-2 bg-primary text-white font-display tracking-widest uppercase text-sm px-10 py-4 hover:bg-primary/90 transition-colors"
                         >
                             <span className="material-icons text-lg">calendar_month</span>

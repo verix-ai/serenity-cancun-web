@@ -136,8 +136,8 @@ const policySections = [
             },
             {
                 label: "Phone",
-                value: "+1 209-689-1052",
-                href: "tel:+12096891052",
+                value: "+1 877-32-SRNTY (7-7689)",
+                href: "tel:+18773277689",
                 icon: "phone",
             },
             {

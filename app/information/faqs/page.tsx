@@ -150,14 +150,15 @@ export default function FAQsPage() {
                     {/* Contact Details */}
                     <div className="flex flex-col sm:flex-row gap-8 justify-center mb-10">
                         <a
-                            href="tel:+12096891052"
+                            href="tel:+18773277689"
                             className="flex items-center gap-3 justify-center text-gray-300 hover:text-primary transition-colors"
                         >
                             <span className="material-icons text-primary text-2xl">
                                 phone
                             </span>
-                            <span className="font-body text-lg">
-                                +1 209-689-1052
+                            <span className="text-center">
+                                <span className="font-body text-lg block">+1 877-32-SRNTY</span>
+                                <span className="font-body text-sm text-gray-500 block">(7-7689)</span>
                             </span>
                         </a>
                         <a

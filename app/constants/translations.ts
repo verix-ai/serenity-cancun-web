@@ -484,7 +484,7 @@ export const translations = {
                     category: "Contact & Visits",
                     faqs: [
                         { question: "How can I schedule a visit?", answer: "To schedule a private tour, contact our sales team through our website, phone, or email. Virtual tours are also available for international buyers." },
-                        { question: "Who can I contact for more information?", answer: "You can reach our team via Phone: +1 209-689-1052 or Email: info@serenityluxurycondos.com. We're happy to assist with any questions you may have!" },
+                        { question: "Who can I contact for more information?", answer: "You can reach our team via Phone: +1 877-32-SRNTY (7-7689) or Email: info@serenityluxurycondos.com. We're happy to assist with any questions you may have!" },
                     ],
                 },
             ],
@@ -982,7 +982,7 @@ export const translations = {
                     category: "Contacto y Visitas",
                     faqs: [
                         { question: "¿Cómo puedo programar una visita?", answer: "Para programar un recorrido privado, contacta a nuestro equipo de ventas a través de nuestro sitio web, teléfono o correo electrónico. Los recorridos virtuales también están disponibles para compradores internacionales." },
-                        { question: "¿A quién puedo contactar para más información?", answer: "Puedes contactar a nuestro equipo por Teléfono: +1 209-689-1052 o Email: info@serenityluxurycondos.com. ¡Estamos felices de ayudarte con cualquier pregunta que tengas!" },
+                        { question: "¿A quién puedo contactar para más información?", answer: "Puedes contactar a nuestro equipo por Teléfono: +1 877-32-SRNTY (7-7689) o Email: info@serenityluxurycondos.com. ¡Estamos felices de ayudarte con cualquier pregunta que tengas!" },
                     ],
                 },
             ],
@@ -1480,7 +1480,7 @@ export const translations = {
                     category: "Contact et Visites",
                     faqs: [
                         { question: "Comment puis-je programmer une visite ?", answer: "Pour programmer une visite privée, contactez notre équipe de vente via notre site web, par téléphone ou par e-mail. Des visites virtuelles sont également disponibles pour les acheteurs internationaux." },
-                        { question: "Qui puis-je contacter pour plus d'informations ?", answer: "Vous pouvez joindre notre équipe par Téléphone : +1 209-689-1052 ou Email : info@serenityluxurycondos.com. Nous serons ravis de vous aider avec toutes vos questions !" },
+                        { question: "Qui puis-je contacter pour plus d'informations ?", answer: "Vous pouvez joindre notre équipe par Téléphone : +1 877-32-SRNTY (7-7689) ou Email : info@serenityluxurycondos.com. Nous serons ravis de vous aider avec toutes vos questions !" },
                     ],
                 },
             ],
@@ -1978,7 +1978,7 @@ export const translations = {
                     category: "Contatto e Visite",
                     faqs: [
                         { question: "Come posso programmare una visita?", answer: "Per programmare una visita privata, contattate il nostro team di vendita tramite il nostro sito web, telefono o e-mail. Visite virtuali sono anche disponibili per gli acquirenti internazionali." },
-                        { question: "Chi posso contattare per maggiori informazioni?", answer: "Potete raggiungere il nostro team per Telefono: +1 209-689-1052 o Email: info@serenityluxurycondos.com. Saremo lieti di aiutarvi con qualsiasi domanda!" },
+                        { question: "Chi posso contattare per maggiori informazioni?", answer: "Potete raggiungere il nostro team per Telefono: +1 877-32-SRNTY (7-7689) o Email: info@serenityluxurycondos.com. Saremo lieti di aiutarvi con qualsiasi domanda!" },
                     ],
                 },
             ],
@@ -2476,7 +2476,7 @@ export const translations = {
                     category: "Kontakt und Besichtigungen",
                     faqs: [
                         { question: "Wie kann ich eine Tour vereinbaren?", answer: "Um eine private Tour zu vereinbaren, kontaktieren Sie unser Verkaufsteam über unsere Website, per Telefon oder E-Mail. Virtuelle Besichtigungen sind auch für internationale Käufer verfügbar." },
-                        { question: "Wen kann ich für weitere Informationen kontaktieren?", answer: "Sie können unser Team per Telefon erreichen: +1 209-689-1052 oder per E-Mail: info@serenityluxurycondos.com. Wir helfen Ihnen gerne bei allen Fragen!" },
+                        { question: "Wen kann ich für weitere Informationen kontaktieren?", answer: "Sie können unser Team per Telefon erreichen: +1 877-32-SRNTY (7-7689) oder per E-Mail: info@serenityluxurycondos.com. Wir helfen Ihnen gerne bei allen Fragen!" },
                     ],
                 },
             ],

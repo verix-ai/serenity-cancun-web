@@ -35,7 +35,14 @@ export default function Footer() {
                                     <p className="text-xs uppercase tracking-widest text-gray-500 mb-1">
                                         {t.callUs}
                                     </p>
-                                    <p className="font-display text-xl">+1 209-689-1052</p>
+                                    <a href="tel:+18773277689" className="group/phone block">
+                                        <p className="font-display text-xl group-hover/phone:text-primary transition-colors duration-300">
+                                            +1 877-32-SRNTY
+                                        </p>
+                                        <p className="font-display text-sm text-gray-400 tracking-wider mt-0.5">
+                                            (7-7689)
+                                        </p>
+                                    </a>
                                 </div>
                             </div>
                             <div className="flex items-start space-x-4">
@@ -148,7 +155,7 @@ export default function Footer() {
             </div>
             <div className="fixed bottom-8 right-8 z-50 flex flex-col space-y-4">
                 <a
-                    href="https://wa.me/12096891052"
+                    href="https://wa.me/18773277689"
                     target="_blank"
                     className="block hover:scale-110 transition-transform"
                 >
