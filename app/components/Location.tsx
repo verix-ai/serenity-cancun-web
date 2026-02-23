@@ -6,8 +6,8 @@ import { useLanguage } from "../context/LanguageContext";
 
 /* ────────────────────────────────────────── constants ── */
 
-// Serenity Condos — Zona Continental de Isla Mujeres (placeholder)
-const SERENITY_COORDS: [number, number] = [21.2575, -86.7453];
+// Serenity Condos — 63PJ+5HQ, 77415 Cancún, Q.R., Mexico
+const SERENITY_COORDS: [number, number] = [21.24129734979055, -86.91904479300204];
 
 interface Hotspot {
     id: string;
@@ -164,10 +164,16 @@ export default function Location() {
     const t = translations.amenities.location;
     const [activeId, setActiveId] = useState<string | null>(null);
     const [mounted, setMounted] = useState(false);
+    const [hasInteracted, setHasInteracted] = useState(false);
 
     useEffect(() => {
         setMounted(true);
     }, []);
+
+    const handleSelect = (id: string) => {
+        setHasInteracted(true);
+        setActiveId(activeId === id ? null : id);
+    };
 
     const hotspotNames: Record<string, string> = useMemo(() => {
         const names: Record<string, string> = {};
@@ -209,7 +215,7 @@ export default function Location() {
                                 />
                                 <MapView
                                     activeId={activeId}
-                                    onSelect={setActiveId}
+                                    onSelect={handleSelect}
                                     hotspotNames={hotspotNames}
                                 />
                             </>
@@ -218,18 +224,26 @@ export default function Location() {
 
                     {/* Sidebar list */}
                     <div className="lg:col-span-2 space-y-2 max-h-[520px] overflow-y-auto pr-2 custom-scrollbar">
-                        {HOTSPOTS.map((h) => {
+                        {/* Interactivity hint */}
+                        {!hasInteracted && (
+                            <div className="flex items-center gap-2 text-primary/70 text-sm font-display tracking-wider uppercase mb-1 px-2 animate-fade-hint">
+                                <span className="material-icons text-base animate-bounce-subtle">touch_app</span>
+                                Select a destination
+                            </div>
+                        )}
+                        {HOTSPOTS.map((h, index) => {
                             const km = Math.round(haversine(SERENITY_COORDS, h.coords));
                             const mins = estimateDriveMin(km);
                             const isActive = activeId === h.id;
+                            const showPulse = !hasInteracted && index === 0;
                             return (
                                 <button
                                     key={h.id}
-                                    onClick={() => setActiveId(isActive ? null : h.id)}
+                                    onClick={() => handleSelect(h.id)}
                                     className={`w-full text-left px-5 py-4 rounded-lg transition-all duration-300 flex items-center gap-4 cursor-pointer group ${isActive
                                         ? "bg-primary/20 border border-primary/40"
                                         : "bg-white/5 hover:bg-white/10 border border-transparent"
-                                        }`}
+                                        } ${showPulse ? "animate-hint-pulse" : ""}`}
                                 >
                                     <span className="text-2xl flex-shrink-0">{h.emoji}</span>
                                     <div className="flex-1 min-w-0">
@@ -267,6 +281,27 @@ export default function Location() {
                 .custom-scrollbar::-webkit-scrollbar-thumb {
                     background: #bda887;
                     border-radius: 2px;
+                }
+                @keyframes hint-pulse {
+                    0%, 100% { border-color: transparent; box-shadow: none; }
+                    50% { border-color: rgba(189,168,135,0.5); box-shadow: 0 0 12px rgba(189,168,135,0.15); }
+                }
+                .animate-hint-pulse {
+                    animation: hint-pulse 2s ease-in-out infinite;
+                }
+                @keyframes bounce-subtle {
+                    0%, 100% { transform: translateY(0); }
+                    50% { transform: translateY(-3px); }
+                }
+                .animate-bounce-subtle {
+                    animation: bounce-subtle 1.5s ease-in-out infinite;
+                }
+                @keyframes fade-hint {
+                    0% { opacity: 0; transform: translateY(-4px); }
+                    100% { opacity: 1; transform: translateY(0); }
+                }
+                .animate-fade-hint {
+                    animation: fade-hint 0.6s ease-out forwards;
                 }
             `}</style>
         </section>
