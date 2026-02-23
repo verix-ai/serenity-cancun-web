@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 import Image from "next/image";
 import Navbar from "../components/Navbar";
 import PageHero from "../components/PageHero";
@@ -10,12 +12,14 @@ export default function ResidencesPage() {
     const { translations } = useLanguage();
     const t = translations.residences;
     const tf = t.features; // Feature labels
+    const [activeSlides, setActiveSlides] = useState<Record<number, number>>({});
 
     const residences = [
         {
             ...t.list[0], // Quetzal
             units: 6,
             image: "/assets/photo-gallery/livingroom-1.png",
+            blueprint: "/assets/Quetzal.jpeg",
             icon: "apartment",
             features: [
                 { icon: "bed", label: tf.bedrooms, detail: t.list[0].features[0].detail },
@@ -35,6 +39,7 @@ export default function ResidencesPage() {
             ...t.list[1], // Quetzal Plus
             units: 3,
             image: "/assets/photo-gallery/bedroom-1.jpg",
+            blueprint: "/assets/Quetzal Plus.jpeg",
             icon: "villa",
             features: [
                 { icon: "bed", label: tf.bedrooms, detail: t.list[1].features[0].detail },
@@ -55,6 +60,7 @@ export default function ResidencesPage() {
             ...t.list[2], // Jaguar Plus
             units: 3,
             image: "/assets/photo-gallery/bedroom 2.jpg",
+            blueprint: "/assets/Jaguar Plus.jpeg",
             icon: "diamond",
             features: [
                 { icon: "bed", label: tf.bedrooms, detail: t.list[2].features[0].detail },
@@ -164,27 +170,97 @@ export default function ResidencesPage() {
                         {/* Image + Description */}
                         <div className={`grid md:grid-cols-2 gap-16 items-center mb-20 ${index % 2 !== 0 ? "md:[&>*:first-child]:order-2" : ""
                             }`}>
-                            <div className="relative group overflow-hidden rounded-2xl shadow-2xl">
-                                <Image
-                                    src={res.image}
-                                    alt={`${res.name} residence interior`}
-                                    width={800}
-                                    height={600}
-                                    className="w-full h-[400px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-deep-dark/50 to-transparent"></div>
-                                <div className="absolute bottom-6 left-6">
+                            <div className="relative overflow-hidden rounded-2xl shadow-2xl">
+                                {/* Slides */}
+                                {[res.image, ...(res.blueprint ? [res.blueprint] : [])].map((src, slideIdx) => (
+                                    <div
+                                        key={slideIdx}
+                                        className={`${(activeSlides[index] || 0) === slideIdx ? "block" : "hidden"
+                                            }`}
+                                    >
+                                        <Image
+                                            src={src}
+                                            alt={
+                                                slideIdx === 0
+                                                    ? `${res.name} residence interior`
+                                                    : `${res.name} floor plan`
+                                            }
+                                            width={800}
+                                            height={600}
+                                            className={`w-full h-[400px] md:h-[500px] transition-transform duration-700 ${slideIdx === 0 ? "object-cover" : "object-contain bg-white"
+                                                }`}
+                                        />
+                                    </div>
+                                ))}
+
+                                {/* Gradient overlay (only on photo slide) */}
+                                {(activeSlides[index] || 0) === 0 && (
+                                    <div className="absolute inset-0 bg-gradient-to-t from-deep-dark/50 to-transparent pointer-events-none"></div>
+                                )}
+
+                                {/* Bottom label */}
+                                <div className="absolute bottom-6 left-6 z-10">
                                     <div className="flex items-center gap-3">
                                         <div className="w-12 h-12 bg-primary/90 rounded-full flex items-center justify-center backdrop-blur-sm">
                                             <span className="material-icons text-white text-2xl">
-                                                {res.icon}
+                                                {(activeSlides[index] || 0) === 0 ? res.icon : "architecture"}
                                             </span>
                                         </div>
-                                        <span className="font-display text-white text-lg font-bold uppercase tracking-wider">
-                                            {res.name}
+                                        <span className="font-display text-white text-lg font-bold uppercase tracking-wider drop-shadow-lg">
+                                            {(activeSlides[index] || 0) === 0 ? res.name : t.floorPlanLabel || "Floor Plan"}
                                         </span>
                                     </div>
                                 </div>
+
+                                {/* Navigation arrows */}
+                                {res.blueprint && (
+                                    <>
+                                        <button
+                                            onClick={() =>
+                                                setActiveSlides((prev) => ({
+                                                    ...prev,
+                                                    [index]: (prev[index] || 0) === 0 ? 1 : 0,
+                                                }))
+                                            }
+                                            className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-deep-dark/60 hover:bg-deep-dark/80 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-colors z-10"
+                                            aria-label="Previous slide"
+                                        >
+                                            <span className="material-icons text-xl">chevron_left</span>
+                                        </button>
+                                        <button
+                                            onClick={() =>
+                                                setActiveSlides((prev) => ({
+                                                    ...prev,
+                                                    [index]: (prev[index] || 0) === 0 ? 1 : 0,
+                                                }))
+                                            }
+                                            className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-deep-dark/60 hover:bg-deep-dark/80 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-colors z-10"
+                                            aria-label="Next slide"
+                                        >
+                                            <span className="material-icons text-xl">chevron_right</span>
+                                        </button>
+
+                                        {/* Dot indicators */}
+                                        <div className="absolute bottom-6 right-6 flex gap-2 z-10">
+                                            {[0, 1].map((dotIdx) => (
+                                                <button
+                                                    key={dotIdx}
+                                                    onClick={() =>
+                                                        setActiveSlides((prev) => ({
+                                                            ...prev,
+                                                            [index]: dotIdx,
+                                                        }))
+                                                    }
+                                                    className={`w-3 h-3 rounded-full transition-all ${(activeSlides[index] || 0) === dotIdx
+                                                        ? "bg-primary scale-110"
+                                                        : "bg-white/50 hover:bg-white/80"
+                                                        }`}
+                                                    aria-label={`Slide ${dotIdx + 1}`}
+                                                />
+                                            ))}
+                                        </div>
+                                    </>
+                                )}
                             </div>
 
                             <div>
@@ -311,34 +387,13 @@ export default function ResidencesPage() {
                     <p className="font-body text-lg text-charcoal-dark dark:text-gray-300 leading-relaxed mb-10 max-w-3xl mx-auto">
                         {t.dreamHome.p2}
                     </p>
-                    <a
-                        href="#inquiry"
-                        className="inline-flex items-center gap-2 bg-primary text-white font-display tracking-widest uppercase text-sm px-10 py-4 hover:bg-primary/90 transition-colors"
-                    >
-                        <span className="material-icons text-lg">calendar_month</span>
-                        {t.dreamHome.schedule}
-                    </a>
-                </div>
-            </section>
-
-            {/* CTA Section */}
-            <section className="py-24 bg-deep-dark text-center">
-                <div className="max-w-4xl mx-auto px-6">
-                    <span className="font-script text-4xl text-primary block mb-4">
-                        {t.cta.subtitle}
-                    </span>
-                    <h2 className="font-display text-3xl md:text-5xl font-bold text-white uppercase mb-8">
-                        {t.cta.title}
-                    </h2>
-                    <p className="font-body text-lg text-gray-400 leading-relaxed mb-10 max-w-2xl mx-auto">
-                        {t.cta.description}
-                    </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <a
                             href="#inquiry"
-                            className="inline-block bg-primary text-white font-display tracking-widest uppercase text-sm px-10 py-4 hover:bg-primary/90 transition-colors"
+                            className="inline-flex items-center gap-2 bg-primary text-white font-display tracking-widest uppercase text-sm px-10 py-4 hover:bg-primary/90 transition-colors"
                         >
-                            {t.cta.scheduleTour}
+                            <span className="material-icons text-lg">calendar_month</span>
+                            {t.dreamHome.schedule}
                         </a>
                         <a
                             href="/amenities"
@@ -349,6 +404,8 @@ export default function ResidencesPage() {
                     </div>
                 </div>
             </section>
+
+
 
             <Footer />
         </>

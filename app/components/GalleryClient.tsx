@@ -62,14 +62,14 @@ export default function GalleryClient({ images }: GalleryClientProps) {
                         <Image
                             src="/assets/logo.svg"
                             alt="Serenity Logo"
-                            width={80}
-                            height={80}
-                            className="mb-4"
+                            width={120}
+                            height={120}
+                            className="mb-5"
                         />
-                        <span className="font-display font-bold text-white text-2xl uppercase tracking-[0.2em]">
+                        <span className="font-display font-bold text-white text-4xl uppercase tracking-[0.2em]">
                             Serenity
                         </span>
-                        <span className="text-white/60 text-[11px] uppercase tracking-[0.15em] mt-3">
+                        <span className="text-white/60 text-sm uppercase tracking-[0.15em] mt-3">
                             Luxury Condos
                         </span>
                     </div>

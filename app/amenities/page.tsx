@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Navbar from "../components/Navbar";
 import PageHero from "../components/PageHero";
+import Location from "../components/Location";
 import Footer from "../components/Footer";
 import { useLanguage } from "../context/LanguageContext";
 
@@ -212,6 +213,9 @@ export default function AmenitiesPage() {
                     </div>
                 </div>
             </section>
+
+            {/* Interactive Map */}
+            <Location />
 
             {/* CTA Section */}
             <section className="py-24 bg-white dark:bg-deep-dark">
