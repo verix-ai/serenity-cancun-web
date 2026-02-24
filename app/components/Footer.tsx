@@ -139,18 +139,6 @@ export default function Footer() {
                                     height={20}
                                 />
                             </Link>
-                            <Link
-                                href="#"
-                                className="w-10 h-10 border border-gray-700 flex items-center justify-center hover:bg-primary transition-colors"
-                                aria-label="WhatsApp"
-                            >
-                                <Image
-                                    src="/assets/WhatsApp_icon.png"
-                                    alt="WhatsApp"
-                                    width={20}
-                                    height={20}
-                                />
-                            </Link>
                         </div>
                     </div>
                     <div className="bg-charcoal-dark p-8 md:p-12 rounded-lg">
@@ -230,25 +218,22 @@ export default function Footer() {
                     <p>{t.copyright}</p>
                     <Link
                         href="/information/privacy-policy"
-                        className="inline-block mt-4 text-gray-500 hover:text-primary transition-colors duration-300"
+                        className="inline-block mt-4 mb-4 text-gray-500 hover:text-primary transition-colors duration-300"
                     >
                         {t.privacy}
                     </Link>
+                    <p>
+                        Crafted with Excellence By{" "}
+                        <a
+                            href="https://www.verix.ai"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-primary hover:opacity-80 transition-opacity"
+                        >
+                            Verix AI
+                        </a>.
+                    </p>
                 </div>
-            </div>
-            <div className="fixed bottom-8 right-8 z-50 flex flex-col space-y-4">
-                <a
-                    href="https://wa.me/18773277689"
-                    target="_blank"
-                    className="block hover:scale-110 transition-transform"
-                >
-                    <Image
-                        src="/assets/WhatsApp_icon.png"
-                        alt="WhatsApp"
-                        width={60}
-                        height={60}
-                    />
-                </a>
             </div>
         </footer>
     );
