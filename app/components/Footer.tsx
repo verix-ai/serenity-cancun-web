@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { useLanguage } from "../context/LanguageContext";
+import { customEvent } from "../../lib/fpixel";
 
 export default function Footer() {
     const { translations } = useLanguage();
@@ -43,6 +44,7 @@ export default function Footer() {
             if (response.ok) {
                 setSubmitStatus("success");
                 setFormData({ firstName: "", lastName: "", email: "", phone: "", message: "" });
+                customEvent("Lead", { location: "Footer Contact Form" });
             } else {
                 setSubmitStatus("error");
             }

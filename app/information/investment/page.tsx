@@ -5,6 +5,7 @@ import Footer from "../../components/Footer";
 import PageHero from "../../components/PageHero";
 import Link from "next/link";
 import { useLanguage } from "../../context/LanguageContext";
+import { customEvent } from "../../../lib/fpixel";
 
 const reasonIcons = ["location_on", "payments", "trending_up", "apartment", "support_agent", "tune"];
 const reasonNumbers = ["01", "02", "03", "04", "05", "06"];
@@ -157,6 +158,7 @@ export default function InvestmentPage() {
                         </Link>
                         <Link
                             href="#contact"
+                            onClick={() => customEvent("ScheduleTourClick", { location: "Investment Page CTA" })}
                             className="border-2 border-primary text-primary px-10 py-4 text-sm font-bold uppercase tracking-wider hover:bg-primary hover:text-white transition-all inline-block"
                         >
                             {t.cta.schedule}

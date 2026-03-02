@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 import LanguageSelector from "./LanguageSelector";
 import { useLanguage } from "../context/LanguageContext";
+import { customEvent } from "../../lib/fpixel";
 
 export default function Navbar() {
     const { translations } = useLanguage();
@@ -159,7 +160,7 @@ export default function Navbar() {
                         </div>
                     </div>
 
-                    <Link href="#contact" className="hover:text-primary transition-colors">
+                    <Link href="#contact" onClick={() => customEvent("ScheduleTourClick", { location: "Navbar Desktop CTA" })} className="hover:text-primary transition-colors">
                         {t.inquiry}
                     </Link>
                 </div>
@@ -168,7 +169,7 @@ export default function Navbar() {
                     <div className="hidden sm:block">
                         <LanguageSelector />
                     </div>
-                    <Link href="#contact" className="bg-primary text-white px-4 sm:px-6 py-2 text-xs sm:text-sm font-bold uppercase tracking-wider whitespace-nowrap hover:bg-opacity-90 transition-all cursor-pointer">
+                    <Link href="#contact" onClick={() => customEvent("ScheduleTourClick", { location: "Navbar Desktop Book Tour" })} className="bg-primary text-white px-4 sm:px-6 py-2 text-xs sm:text-sm font-bold uppercase tracking-wider whitespace-nowrap hover:bg-opacity-90 transition-all cursor-pointer">
                         {t.bookTour}
                     </Link>
 
@@ -276,7 +277,10 @@ export default function Navbar() {
                     <Link
                         href="#contact"
                         className="block py-3 text-xs uppercase tracking-widest font-semibold hover:text-primary transition-colors"
-                        onClick={() => setMobileOpen(false)}
+                        onClick={() => {
+                            setMobileOpen(false);
+                            customEvent("ScheduleTourClick", { location: "Navbar Mobile CTA" });
+                        }}
                     >
                         {t.inquiry}
                     </Link>
