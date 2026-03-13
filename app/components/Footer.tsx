@@ -212,18 +212,49 @@ export default function Footer() {
                                 >
                                     {isSubmitting ? t.sending : t.send}
                                 </button>
+                                <p className="text-xs text-gray-500 leading-relaxed mt-4">
+                                    I consent to receive SMS notifications, alerts, and occasional marketing
+                                    messages from Serenity Luxury Condos. Message frequency varies. Message
+                                    &amp; data rates may apply. Text HELP to{" "}
+                                    <a href="tel:+18773277689" className="text-gray-400 hover:text-primary transition-colors">
+                                        +1 877-327-7689
+                                    </a>{" "}
+                                    for assistance. Reply STOP to unsubscribe at any time. View our{" "}
+                                    <Link
+                                        href="/information/privacy-policy"
+                                        className="text-gray-400 hover:text-primary transition-colors underline"
+                                    >
+                                        Privacy Policy
+                                    </Link>{" "}
+                                    &amp;{" "}
+                                    <Link
+                                        href="/information/terms-of-service"
+                                        className="text-gray-400 hover:text-primary transition-colors underline"
+                                    >
+                                        Terms of Service
+                                    </Link>.
+                                </p>
                             </form>
                         )}
                     </div>
                 </div>
                 <div className="border-t border-gray-800 pt-12 text-center text-sm text-gray-500 uppercase tracking-widest">
                     <p>{t.copyright}</p>
-                    <Link
-                        href="/information/privacy-policy"
-                        className="inline-block mt-4 mb-4 text-gray-500 hover:text-primary transition-colors duration-300"
-                    >
-                        {t.privacy}
-                    </Link>
+                    <div className="mt-4 mb-4 flex items-center justify-center gap-3">
+                        <Link
+                            href="/information/privacy-policy"
+                            className="text-gray-500 hover:text-primary transition-colors duration-300"
+                        >
+                            {t.privacy}
+                        </Link>
+                        <span className="text-gray-700">|</span>
+                        <Link
+                            href="/information/terms-of-service"
+                            className="text-gray-500 hover:text-primary transition-colors duration-300"
+                        >
+                            {t.termsOfService}
+                        </Link>
+                    </div>
                     <p>
                         Crafted with Excellence By{" "}
                         <a

@@ -35,6 +35,7 @@ export const translations = {
             errorMessage: "An error occurred while sending your message. Please try again or call us directly.",
             copyright: "Copyright © 2026 Serenity Luxury Condos. All Rights Reserved.",
             privacy: "Privacy Policy",
+            termsOfService: "Terms of Service",
         },
         home: {
             hero: {
@@ -537,6 +538,7 @@ export const translations = {
             errorMessage: "Ocurrió un error al enviar su mensaje. Por favor intente de nuevo o llámenos directamente.",
             copyright: "Copyright © 2026 Serenity Luxury Condos. Todos los derechos reservados.",
             privacy: "Política de Privacidad",
+            termsOfService: "Términos de Servicio",
         },
         home: {
             hero: {
@@ -1039,6 +1041,7 @@ export const translations = {
             errorMessage: "Une erreur s'est produite lors de l'envoi de votre message. Veuillez réessayer ou nous appeler directement.",
             copyright: "Copyright © 2026 Serenity Luxury Condos. Tous droits réservés.",
             privacy: "Politique de Confidentialité",
+            termsOfService: "Conditions d'Utilisation",
         },
         home: {
             hero: {
@@ -1541,6 +1544,7 @@ export const translations = {
             errorMessage: "Si è verificato un errore durante l'invio del messaggio. Riprova o chiamaci direttamente.",
             copyright: "Copyright © 2026 Serenity Luxury Condos. Tutti i diritti riservati.",
             privacy: "Informativa sulla Privacy",
+            termsOfService: "Termini di Servizio",
         },
         home: {
             hero: {
@@ -2043,6 +2047,7 @@ export const translations = {
             errorMessage: "Beim Senden Ihrer Nachricht ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder rufen Sie uns direkt an.",
             copyright: "Copyright © 2026 Serenity Luxury Condos. Alle Rechte vorbehalten.",
             privacy: "Datenschutzrichtlinie",
+            termsOfService: "Nutzungsbedingungen",
         },
         home: {
             hero: {
