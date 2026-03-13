@@ -33,3 +33,29 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
+/* Phone Input Dark Theme */
+.phone-input-dark .PhoneInputInput {
+  background: transparent;
+  color: white;
+  border: none;
+  outline: none;
+  padding: 0;
+}
+
+.phone-input-dark .PhoneInputInput::placeholder {
+  color: #9ca3af;
+}
+
+.phone-input-dark .PhoneInputCountry {
+  margin-right: 0.75rem;
+}
+
+.phone-input-dark .PhoneInputCountrySelect {
+  background: #242323;
+  color: white;
+}
+
+.phone-input-dark .PhoneInputCountrySelectArrow {
+  border-color: #9ca3af;
+}

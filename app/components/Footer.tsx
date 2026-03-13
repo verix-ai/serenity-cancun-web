@@ -3,6 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import PhoneInput from "react-phone-number-input";
+import "react-phone-number-input/style.css";
 import { useLanguage } from "../context/LanguageContext";
 import { customEvent } from "../../lib/fpixel";
 
@@ -17,10 +19,11 @@ export default function Footer() {
         lastName: "",
         email: "",
         phone: "",
+        condoType: "",
         message: ""
     });
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setFormData({
             ...formData,
             [e.target.name]: e.target.value
@@ -43,7 +46,7 @@ export default function Footer() {
 
             if (response.ok) {
                 setSubmitStatus("success");
-                setFormData({ firstName: "", lastName: "", email: "", phone: "", message: "" });
+                setFormData({ firstName: "", lastName: "", email: "", phone: "", condoType: "", message: "" });
                 customEvent("Lead", { location: "Footer Contact Form" });
             } else {
                 setSubmitStatus("error");
@@ -166,39 +169,53 @@ export default function Footer() {
                                         required
                                         value={formData.firstName}
                                         onChange={handleChange}
-                                        placeholder={t.placeholders.firstName}
+                                        placeholder={`${t.placeholders.firstName} *`}
                                         className="bg-deep-dark border-gray-700 text-white p-4 focus:ring-primary focus:border-primary w-full"
                                     />
                                     <input
                                         type="text"
                                         name="lastName"
-                                        required
                                         value={formData.lastName}
                                         onChange={handleChange}
                                         placeholder={t.placeholders.lastName}
                                         className="bg-deep-dark border-gray-700 text-white p-4 focus:ring-primary focus:border-primary w-full"
                                     />
                                 </div>
-                                <input
-                                    type="email"
-                                    name="email"
+                                <div className="grid grid-cols-2 gap-4">
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        required
+                                        value={formData.email}
+                                        onChange={handleChange}
+                                        placeholder={`${t.placeholders.email} *`}
+                                        className="bg-deep-dark border-gray-700 text-white p-4 focus:ring-primary focus:border-primary w-full"
+                                    />
+                                    <PhoneInput
+                                        international
+                                        defaultCountry="US"
+                                        limitMaxLength
+                                        value={formData.phone}
+                                        onChange={(value) => setFormData({ ...formData, phone: value || "" })}
+                                        placeholder={t.placeholders.phone}
+                                        className="phone-input-dark bg-deep-dark border-gray-700 text-white p-4 focus:ring-primary focus:border-primary w-full"
+                                    />
+                                </div>
+                                <select
+                                    name="condoType"
                                     required
-                                    value={formData.email}
+                                    value={formData.condoType}
                                     onChange={handleChange}
-                                    placeholder={t.placeholders.email}
                                     className="bg-deep-dark border-gray-700 text-white p-4 focus:ring-primary focus:border-primary w-full"
-                                />
-                                <input
-                                    type="tel"
-                                    name="phone"
-                                    value={formData.phone}
-                                    onChange={handleChange}
-                                    placeholder={t.placeholders.phone}
-                                    className="bg-deep-dark border-gray-700 text-white p-4 focus:ring-primary focus:border-primary w-full"
-                                />
+                                >
+                                    <option value="" disabled>{t.placeholders.condoType} *</option>
+                                    <option value="Quetzal">Quetzal</option>
+                                    <option value="Quetzal+">Quetzal+</option>
+                                    <option value="Jaguar">Jaguar</option>
+                                    <option value="Not Sure">{t.placeholders.condoTypeNotSure}</option>
+                                </select>
                                 <textarea
                                     name="message"
-                                    required
                                     value={formData.message}
                                     onChange={handleChange}
                                     placeholder={t.placeholders.message}

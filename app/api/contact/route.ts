@@ -5,7 +5,7 @@ export async function POST(request: Request) {
         const body = await request.json();
 
         // Basic validation
-        if (!body.firstName || !body.email || !body.message) {
+        if (!body.firstName || !body.email || !body.condoType) {
             return NextResponse.json(
                 { error: 'Missing required fields' },
                 { status: 400 }
