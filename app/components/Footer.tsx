@@ -22,6 +22,8 @@ export default function Footer() {
         condoType: "",
         message: ""
     });
+    const [consentMarketing, setConsentMarketing] = useState(false);
+    const [consentNonMarketing, setConsentNonMarketing] = useState(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setFormData({
@@ -41,12 +43,18 @@ export default function Footer() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(formData)
+                body: JSON.stringify({
+                    ...formData,
+                    consentMarketing,
+                    consentNonMarketing
+                })
             });
 
             if (response.ok) {
                 setSubmitStatus("success");
                 setFormData({ firstName: "", lastName: "", email: "", phone: "", condoType: "", message: "" });
+                setConsentMarketing(false);
+                setConsentNonMarketing(false);
                 customEvent("Lead", { location: "Footer Contact Form" });
             } else {
                 setSubmitStatus("error");
@@ -120,30 +128,28 @@ export default function Footer() {
                             </div>
                         </div>
                         <div className="mt-12 flex space-x-4">
-                            <Link
-                                href="#"
+                            <a
+                                href="https://www.facebook.com/profile.php?id=61588369027148"
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="w-10 h-10 border border-gray-700 flex items-center justify-center hover:bg-primary transition-colors"
                                 aria-label="Facebook"
                             >
-                                <Image
-                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3-8vd3BhpUwJNH3NcnX2WUvLuwfFsvGp00XFLuK81TpTnjDD0d8xXmEBRnCJzah7TtrQtRx2kbwhgjAYo5W1pkSOFGnKg1NXXz7F2oiH8U0IZngU8wlEqbol-XfT3rsQua-B-vUPn6F-0CfRkYPkOTDEn3zgMY7CVvuuyRxi8wwGMFAwSXAw9Cr7QwG6d5ZqW1eNQhNOudqL5YRrdlaREKmEmsJuse_VSKWo0lM8SLpMut4z35DRF8j1wPLFoAOyuZo-WKajNBBU"
-                                    alt="Facebook"
-                                    width={20}
-                                    height={20}
-                                />
-                            </Link>
-                            <Link
-                                href="#"
+                                <svg className="w-5 h-5 fill-current text-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                                </svg>
+                            </a>
+                            <a
+                                href="https://www.instagram.com/serenityluxurycondos/"
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="w-10 h-10 border border-gray-700 flex items-center justify-center hover:bg-primary transition-colors"
                                 aria-label="Instagram"
                             >
-                                <Image
-                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEJxDHpryY-FZRl6PrWcnv8LrY4YAfNDcu-gtjDP9A1B6HvZmlA-CxroqKU5RtGfFoo0m69IqGUidRwtfyPI1YmE21gjj5WS1fiaQ8vFMeLUJE8GTQpLk0CC_TXXhzwXxn9zg4OjYKC2o8ckryjt4-2F2T8AfTt0e97i83Kb4vqHelUc5jnWKEL2s7v3evaQRj_jZDcd_zK5i6rp7IfwtkUToX2aVoQpGecxKzk3u87owOkAy6zGfurY4LC7VmyDRePp0_nO8VJZg"
-                                    alt="Instagram"
-                                    width={20}
-                                    height={20}
-                                />
-                            </Link>
+                                <svg className="w-5 h-5 fill-current text-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                                </svg>
+                            </a>
                         </div>
                     </div>
                     <div className="bg-charcoal-dark p-8 md:p-12 rounded-lg">
@@ -229,28 +235,48 @@ export default function Footer() {
                                 >
                                     {isSubmitting ? t.sending : t.send}
                                 </button>
-                                <p className="text-xs text-gray-500 leading-relaxed mt-4">
-                                    I consent to receive SMS notifications, alerts, and occasional marketing
-                                    messages from Serenity Luxury Condos. Message frequency varies. Message
-                                    &amp; data rates may apply. Text HELP to{" "}
-                                    <a href="tel:+18773277689" className="text-gray-400 hover:text-primary transition-colors">
-                                        +1 877-327-7689
-                                    </a>{" "}
-                                    for assistance. Reply STOP to unsubscribe at any time. View our{" "}
-                                    <Link
-                                        href="/information/privacy-policy"
-                                        className="text-gray-400 hover:text-primary transition-colors underline"
-                                    >
-                                        Privacy Policy
-                                    </Link>{" "}
-                                    &amp;{" "}
-                                    <Link
-                                        href="/information/terms-of-service"
-                                        className="text-gray-400 hover:text-primary transition-colors underline"
-                                    >
-                                        Terms of Service
-                                    </Link>.
-                                </p>
+                                <div className="space-y-3 mt-4">
+                                    <label className="flex items-start gap-3 cursor-pointer group">
+                                        <input
+                                            type="checkbox"
+                                            required
+                                            checked={consentMarketing}
+                                            onChange={(e) => setConsentMarketing(e.target.checked)}
+                                            className="mt-1 h-4 w-4 shrink-0 accent-primary cursor-pointer"
+                                        />
+                                        <span className="text-xs text-gray-500 leading-relaxed group-hover:text-gray-400 transition-colors">
+                                            {t.consentMarketing}
+                                        </span>
+                                    </label>
+                                    <label className="flex items-start gap-3 cursor-pointer group">
+                                        <input
+                                            type="checkbox"
+                                            required
+                                            checked={consentNonMarketing}
+                                            onChange={(e) => setConsentNonMarketing(e.target.checked)}
+                                            className="mt-1 h-4 w-4 shrink-0 accent-primary cursor-pointer"
+                                        />
+                                        <span className="text-xs text-gray-500 leading-relaxed group-hover:text-gray-400 transition-colors">
+                                            {t.consentNonMarketing}
+                                        </span>
+                                    </label>
+                                    <p className="text-xs text-gray-600 leading-relaxed mt-2">
+                                        {t.consentFootnote}{" "}
+                                        <Link
+                                            href="/information/privacy-policy"
+                                            className="text-gray-400 hover:text-primary transition-colors underline"
+                                        >
+                                            {t.privacy}
+                                        </Link>{" "}
+                                        &amp;{" "}
+                                        <Link
+                                            href="/information/terms-of-service"
+                                            className="text-gray-400 hover:text-primary transition-colors underline"
+                                        >
+                                            {t.termsOfService}
+                                        </Link>.
+                                    </p>
+                                </div>
                             </form>
                         )}
                     </div>
